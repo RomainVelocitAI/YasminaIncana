@@ -17,6 +17,9 @@ const baseNavigation = [
 
 const propertiesNavItem = { name: 'Biens à vendre', href: '/biens' }
 
+// Pages avec un héro sombre qui nécessitent un header avec fond
+const darkHeroPages = ['/services', '/etude']
+
 interface HeaderProps {
   showPropertiesLink?: boolean
 }
@@ -25,6 +28,9 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
+
+  // Vérifier si la page actuelle a un héro sombre
+  const hasDarkHero = darkHeroPages.some(page => pathname === page)
 
   // Construire la navigation selon si des biens sont disponibles
   const navigation = useMemo(() => {
@@ -45,25 +51,33 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Déterminer les styles du header
+  const headerStyles = isScrolled
+    ? 'bg-surface/95 backdrop-blur-md shadow-sm border-b border-border-light'
+    : hasDarkHero
+      ? 'bg-text-primary/80 backdrop-blur-md'
+      : 'bg-transparent'
+
+  // Couleurs du texte selon le contexte
+  const textColor = !isScrolled && hasDarkHero ? 'text-white' : 'text-text-primary'
+  const textSecondaryColor = !isScrolled && hasDarkHero ? 'text-white/80' : 'text-text-secondary'
+  const textMutedColor = !isScrolled && hasDarkHero ? 'text-white/60' : 'text-text-muted'
+
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-surface/95 backdrop-blur-md shadow-sm border-b border-border-light'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerStyles}`}
     >
       <nav className="container-wide">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="group flex flex-col">
-            <span className="font-serif text-xl md:text-2xl text-text-primary tracking-tight">
+            <span className={`font-serif text-xl md:text-2xl tracking-tight transition-colors ${textColor}`}>
               Maître ARMON INCANA
             </span>
-            <span className="text-xs text-text-muted uppercase tracking-[0.2em] group-hover:text-primary transition-colors">
+            <span className={`text-xs uppercase tracking-[0.2em] group-hover:text-primary transition-colors ${textMutedColor}`}>
               Notaire
             </span>
           </Link>
@@ -77,7 +91,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
                 className={`relative text-sm tracking-wide transition-colors duration-300 ${
                   pathname === item.href
                     ? 'text-primary'
-                    : 'text-text-secondary hover:text-primary'
+                    : `${textSecondaryColor} hover:text-primary`
                 }`}
               >
                 {item.name}
@@ -97,7 +111,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
             {/* Phone - Desktop */}
             <a
               href="tel:0262960300"
-              className="hidden md:flex items-center gap-2 text-sm text-text-secondary hover:text-primary transition-colors"
+              className={`hidden md:flex items-center gap-2 text-sm hover:text-primary transition-colors ${textSecondaryColor}`}
             >
               <Phone className="w-4 h-4" />
               <span>02 62 96 03 00</span>
@@ -114,7 +128,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="text-text-primary">
+                <Button variant="ghost" size="icon" className={textColor}>
                   <Menu className="w-6 h-6" />
                   <span className="sr-only">Menu</span>
                 </Button>

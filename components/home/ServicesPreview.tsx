@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Home, Users, Building2, ArrowRight } from 'lucide-react'
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection'
 import { services } from '@/content/services'
@@ -10,6 +11,13 @@ const iconMap: Record<string, React.ElementType> = {
   Home,
   Users,
   Building2,
+}
+
+// Images locales de La Réunion pour chaque service
+const serviceImages: Record<string, string> = {
+  immobilier: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&h=600&fit=crop', // Architecture tropicale
+  famille: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&h=600&fit=crop', // Plage tropicale famille
+  entreprise: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop', // Immeuble de bureaux moderne
 }
 
 export function ServicesPreview() {
@@ -53,39 +61,54 @@ export function ServicesPreview() {
         <StaggerContainer className="grid md:grid-cols-3 gap-6 lg:gap-8" staggerDelay={0.15}>
           {services.map((service, index) => {
             const Icon = iconMap[service.icon] || Home
+            const imageUrl = serviceImages[service.slug] || serviceImages.immobilier
             return (
               <StaggerItem key={service.slug}>
                 <Link href={`/services/${service.slug}`} className="group block h-full">
                   <motion.article
                     whileHover={{ y: -8 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-surface h-full p-8 lg:p-10 border border-border-light hover:border-primary/30 transition-all duration-500 relative overflow-hidden"
+                    className="bg-surface h-full border border-border-light hover:border-primary/30 transition-all duration-500 relative overflow-hidden"
                   >
-                    {/* Number */}
-                    <span className="absolute top-6 right-6 font-serif text-6xl text-border-light group-hover:text-primary/10 transition-colors duration-500">
-                      0{index + 1}
-                    </span>
+                    {/* Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={imageUrl}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-text-primary/60 via-text-primary/20 to-transparent" />
 
-                    {/* Icon */}
-                    <div className="relative mb-8">
-                      <div className="w-16 h-16 flex items-center justify-center bg-primary/5 group-hover:bg-primary transition-colors duration-500">
-                        <Icon className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-500" />
+                      {/* Number overlay */}
+                      <span className="absolute top-4 right-4 font-serif text-5xl text-white/30">
+                        0{index + 1}
+                      </span>
+
+                      {/* Icon overlay */}
+                      <div className="absolute bottom-4 left-4">
+                        <div className="w-12 h-12 flex items-center justify-center bg-white/90 backdrop-blur-sm">
+                          <Icon className="w-6 h-6 text-primary" />
+                        </div>
                       </div>
-                      <div className="absolute -bottom-2 -right-2 w-16 h-16 border border-gold/20 -z-10" />
                     </div>
 
                     {/* Content */}
-                    <h3 className="font-serif text-2xl text-text-primary mb-4 group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-text-secondary mb-6 leading-relaxed">
-                      {service.shortDescription}
-                    </p>
+                    <div className="p-6 lg:p-8">
+                      <h3 className="font-serif text-2xl text-text-primary mb-3 group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-text-secondary mb-6 leading-relaxed text-sm">
+                        {service.shortDescription}
+                      </p>
 
-                    {/* Link */}
-                    <div className="flex items-center gap-2 text-primary font-medium">
-                      <span className="text-sm uppercase tracking-wider">En savoir plus</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                      {/* Link */}
+                      <div className="flex items-center gap-2 text-primary font-medium">
+                        <span className="text-sm uppercase tracking-wider">En savoir plus</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                      </div>
                     </div>
 
                     {/* Bottom line decoration */}

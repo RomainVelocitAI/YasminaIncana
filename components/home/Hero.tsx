@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
-import { ArrowDown, Play } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function Hero() {
@@ -45,9 +45,9 @@ export function Hero() {
       </div>
 
       <motion.div style={{ y, opacity, scale }} className="container-wide relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center py-24 lg:py-0">
-          {/* Text Content - 55% */}
-          <div className="lg:col-span-7 order-2 lg:order-1">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center py-24 lg:py-0">
+          {/* Text Content */}
+          <div className="order-2 lg:order-1">
             {/* Eyebrow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -139,42 +139,42 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Video Section - 45% */}
+          {/* Video Section */}
           <motion.div
             initial={{ opacity: 0, x: 50, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="lg:col-span-5 order-1 lg:order-2"
+            className="order-1 lg:order-2"
           >
             <div className="relative">
               {/* Decorative frame */}
               <div className="absolute -inset-4 border border-gold/20 -z-10" />
               <div className="absolute -inset-8 border border-border-light -z-20" />
 
-              {/* Video/Image container */}
-              <div className="relative aspect-[4/5] bg-text-primary overflow-hidden group">
-                {/* Image de fond - remplacer par une vidéo plus tard */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage:
-                      "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=1000&fit=crop')",
-                  }}
-                />
+              {/* Video container */}
+              <div className="relative aspect-video bg-text-primary overflow-hidden">
+                {/* Video en lecture automatique, en boucle, muette, sans contrôles */}
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source
+                    src="https://res.cloudinary.com/dqd514udc/video/upload/v1766426510/Untitled_Made_with_FlexClip_2_vfi121.mp4"
+                    type="video/mp4"
+                  />
+                  {/* Fallback image si la vidéo ne charge pas */}
+                  <img
+                    src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=1000&fit=crop"
+                    alt="L'étude notariale"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </video>
 
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-text-primary/60 via-transparent to-text-primary/20" />
-
-                {/* Play button overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-2xl"
-                  >
-                    <Play className="w-8 h-8 text-primary ml-1" fill="currentColor" />
-                  </motion.button>
-                </div>
+                {/* Overlay gradient subtil */}
+                <div className="absolute inset-0 bg-gradient-to-t from-text-primary/40 via-transparent to-text-primary/10 pointer-events-none" />
 
                 {/* Caption */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-text-primary to-transparent">

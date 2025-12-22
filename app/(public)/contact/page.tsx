@@ -150,17 +150,17 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Map placeholder */}
+                  {/* Map */}
                   <div className="aspect-[4/3] bg-secondary border border-border-light overflow-hidden">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.7!2d55.35!3d-21.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDE2JzEyLjAiUyA1NcKwMjEnMDAuMCJF!5e0!3m2!1sfr!2sfr!4v1"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.8!2d55.3447!3d-21.2667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2178b3a5c5c5c5c5%3A0x0!2s96%20Avenue%20Raymond%20Barre%2C%2097427%20L'%C3%89tang-Sal%C3%A9!5e0!3m2!1sfr!2sfr!4v1"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Localisation de l'étude"
+                      title="Localisation de l'étude - 96 Avenue Raymond Barre, L'Étang-Salé"
                     />
                   </div>
                 </div>
