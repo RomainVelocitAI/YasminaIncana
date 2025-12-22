@@ -122,16 +122,16 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.8 }}
-              className="flex gap-12 mt-16 pt-8 border-t border-border-light"
+              className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-border-light"
             >
               <div>
-                <div className="font-serif text-3xl md:text-4xl text-primary">96</div>
+                <div className="font-serif text-2xl md:text-3xl text-primary">96 Avenue Raymond Barre</div>
                 <div className="text-sm text-text-muted uppercase tracking-wider mt-1">
-                  Avenue Raymond Barre
+                  Adresse
                 </div>
               </div>
               <div>
-                <div className="font-serif text-3xl md:text-4xl text-primary">974</div>
+                <div className="font-serif text-2xl md:text-3xl text-primary">97427 L'Étang-Salé</div>
                 <div className="text-sm text-text-muted uppercase tracking-wider mt-1">
                   La Réunion
                 </div>
