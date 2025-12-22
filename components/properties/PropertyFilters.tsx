@@ -33,19 +33,19 @@ export function PropertyFilters({ propertyTypes, cities }: PropertyFiltersProps)
   const [isOpen, setIsOpen] = useState(false)
 
   const [filters, setFilters] = useState({
-    type: searchParams.get('type') || '',
-    city: searchParams.get('city') || '',
+    type: searchParams.get('type') || 'all',
+    city: searchParams.get('city') || 'all',
     priceMin: searchParams.get('priceMin') || '',
     priceMax: searchParams.get('priceMax') || '',
     surfaceMin: searchParams.get('surfaceMin') || '',
   })
 
-  const hasActiveFilters = Object.values(filters).some((v) => v !== '')
+  const hasActiveFilters = Object.values(filters).some((v) => v !== '' && v !== 'all')
 
   const updateUrl = (newFilters: typeof filters) => {
     const params = new URLSearchParams()
     Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) params.set(key, value)
+      if (value && value !== 'all') params.set(key, value)
     })
     router.push(`/biens?${params.toString()}`)
   }
@@ -58,8 +58,8 @@ export function PropertyFilters({ propertyTypes, cities }: PropertyFiltersProps)
 
   const clearFilters = () => {
     const emptyFilters = {
-      type: '',
-      city: '',
+      type: 'all',
+      city: 'all',
       priceMin: '',
       priceMax: '',
       surfaceMin: '',
@@ -81,7 +81,7 @@ export function PropertyFilters({ propertyTypes, cities }: PropertyFiltersProps)
             <SelectValue placeholder="Tous les types" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Tous les types</SelectItem>
+            <SelectItem value="all">Tous les types</SelectItem>
             {propertyTypes.map((type) => (
               <SelectItem key={type.id} value={type.slug}>
                 {type.name}
@@ -102,7 +102,7 @@ export function PropertyFilters({ propertyTypes, cities }: PropertyFiltersProps)
             <SelectValue placeholder="Toutes les villes" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Toutes les villes</SelectItem>
+            <SelectItem value="all">Toutes les villes</SelectItem>
             {cities.map((city) => (
               <SelectItem key={city} value={city}>
                 {city}
