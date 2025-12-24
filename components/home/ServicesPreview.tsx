@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Home, Users, Building2, ArrowRight } from 'lucide-react'
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection'
+import { FloatingBubbles } from '@/components/animations/FloatingBubbles'
 import { services } from '@/content/services'
 
 const iconMap: Record<string, React.ElementType> = {
@@ -31,6 +32,9 @@ export function ServicesPreview() {
 
       {/* Decorative line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+      {/* Floating bubbles - gold variant for services */}
+      <FloatingBubbles count={5} variant="gold" />
 
       <div className="container-wide relative">
         {/* Header */}

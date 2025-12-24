@@ -107,9 +107,17 @@ export async function hasPublishedProperties(): Promise<boolean> {
   }
 }
 
-// Récupérer les biens mis en avant
+// Récupérer les biens mis en avant (ou les derniers biens publiés si aucun n'est featured)
 export async function getFeaturedProperties(): Promise<PropertyWithRelations[]> {
-  return getProperties({ featured: true, limit: 3 })
+  // D'abord essayer les biens featured
+  const featured = await getProperties({ featured: true, limit: 3 })
+
+  // Si pas de biens featured, retourner les derniers biens publiés
+  if (featured.length === 0) {
+    return getProperties({ limit: 3 })
+  }
+
+  return featured
 }
 
 // Récupérer les types de biens

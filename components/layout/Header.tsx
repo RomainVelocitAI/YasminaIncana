@@ -74,7 +74,9 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="group flex flex-col">
-            <span className={`font-serif text-xl md:text-2xl tracking-tight transition-colors ${textColor}`}>
+            <span className={`font-serif text-xl md:text-2xl tracking-tight transition-colors ${
+              !isScrolled && hasDarkHero ? 'text-white' : 'text-[#8B2942]'
+            } group-hover:opacity-80`}>
               Maître ARMON INCANA
             </span>
             <span className={`text-xs uppercase tracking-[0.2em] group-hover:text-primary transition-colors ${textMutedColor}`}>

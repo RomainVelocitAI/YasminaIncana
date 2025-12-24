@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import Link from 'next/link'
 import { ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { FloatingBubbles } from '@/components/animations/FloatingBubbles'
 
 export function Hero() {
   const containerRef = useRef(null)
@@ -43,6 +44,9 @@ export function Hero() {
           className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-gold/5 to-transparent blur-3xl"
         />
       </div>
+
+      {/* Floating bubbles */}
+      <FloatingBubbles count={10} variant="gold" />
 
       <motion.div style={{ y, opacity, scale }} className="container-wide relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center py-24 lg:py-0">

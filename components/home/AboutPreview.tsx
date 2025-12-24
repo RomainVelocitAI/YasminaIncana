@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { StatBlock } from '@/components/animations/AnimatedCounter'
+import { FloatingBubbles } from '@/components/animations/FloatingBubbles'
 import { Button } from '@/components/ui/button'
 
 export function AboutPreview() {
@@ -13,6 +14,9 @@ export function AboutPreview() {
     <section className="py-24 md:py-32 bg-background relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/50 to-transparent pointer-events-none" />
+
+      {/* Floating bubbles - subtle */}
+      <FloatingBubbles count={4} variant="primary" />
 
       <div className="container-wide relative">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">

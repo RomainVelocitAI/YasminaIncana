@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
+import { FloatingBubbles } from '@/components/animations/FloatingBubbles'
 import { Button } from '@/components/ui/button'
 import { notaryInfo } from '@/content/team'
 
@@ -32,6 +33,9 @@ export function ContactBanner() {
         transition={{ duration: 8, repeat: Infinity }}
         className="absolute -top-1/2 -right-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"
       />
+
+      {/* Floating bubbles - light variant for dark background */}
+      <FloatingBubbles count={4} variant="light" />
 
       <div className="container-wide py-20 md:py-28 relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">

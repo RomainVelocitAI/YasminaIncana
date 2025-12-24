@@ -31,7 +31,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="inline-block mb-4">
-              <h3 className="font-serif text-xl text-white">
+              <h3 className="font-serif text-xl text-[#C27A8A]">
                 Maître ARMON INCANA
               </h3>
               <span className="text-xs text-gold uppercase tracking-[0.2em]">
