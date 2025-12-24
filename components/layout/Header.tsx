@@ -18,7 +18,7 @@ const baseNavigation = [
 const propertiesNavItem = { name: 'Biens à vendre', href: '/biens' }
 
 // Pages avec un héro sombre qui nécessitent un header avec fond
-const darkHeroPages = ['/services', '/etude']
+const darkHeroPages = ['/services', '/etude', '/biens']
 
 interface HeaderProps {
   showPropertiesLink?: boolean

@@ -1,10 +1,12 @@
 'use client'
 
+import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, MapPin, Maximize, BedDouble } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/animations/AnimatedSection'
+import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 import { formatPrice, PropertyWithRelations, PropertyStatus } from '@/lib/types'
 import { Badge } from '@/components/ui/badge'
 
@@ -46,6 +48,20 @@ interface FeaturedPropertiesProps {
 }
 
 export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  })
+
+  // Parallax pour chaque carte avec des vitesses différentes
+  const card1Y = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const card2Y = useTransform(scrollYProgress, [0, 1], [60, -60])
+  const card3Y = useTransform(scrollYProgress, [0, 1], [120, -120])
+  const headerY = useTransform(scrollYProgress, [0, 1], [40, -40])
+
+  const cardYValues = [card1Y, card2Y, card3Y]
+
   // Ne rien afficher si pas de biens
   if (!properties || properties.length === 0) {
     return null
@@ -54,21 +70,28 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
   const displayProperties: DisplayProperty[] = properties.map(mapToDisplayProperty)
 
   return (
-    <section className="py-24 md:py-32 bg-background relative">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background relative overflow-hidden">
+      {/* Ligne dorée pulsante en haut */}
+      <PulsingGoldLine position="top" fromDirection="left" />
+
+      {/* Pattern de fond subtil */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, var(--primary) 1px, transparent 0)`,
+        backgroundSize: '48px 48px'
+      }} />
+
       {/* Background decorations */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-wide relative">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        {/* Header avec parallax */}
+        <motion.div style={{ y: headerY }} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <AnimatedSection>
               <div className="flex items-center gap-4 mb-4">
-                <span className="section-number">03</span>
                 <span className="h-px w-12 bg-gold" />
-                <span className="text-text-muted text-sm uppercase tracking-wider">
-                  Immobilier
-                </span>
+                <span className="font-serif text-sm text-gold tracking-[0.15em]">03</span>
+                <span className="h-px w-12 bg-gold" />
               </div>
             </AnimatedSection>
 
@@ -88,18 +111,19 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </AnimatedSection>
-        </div>
+        </motion.div>
 
         {/* Properties grid */}
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {displayProperties.slice(0, 3).map((property) => (
+          {displayProperties.slice(0, 3).map((property, index) => (
             <StaggerItem key={property.id}>
-              <Link href={`/biens/${property.slug}`} className="group block">
-                <motion.article
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-surface border border-border-light hover:border-primary/20 overflow-hidden transition-all duration-500"
-                >
+              <motion.div style={{ y: cardYValues[index] }}>
+                <Link href={`/biens/${property.slug}`} className="group block">
+                  <motion.article
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-surface border border-border-light hover:border-primary/30 overflow-hidden transition-all duration-500 shadow-sm hover:shadow-xl"
+                  >
                   {/* Image */}
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
@@ -153,12 +177,16 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
                       )}
                     </div>
                   </div>
-                </motion.article>
-              </Link>
+                  </motion.article>
+                </Link>
+              </motion.div>
             </StaggerItem>
           ))}
         </StaggerContainer>
       </div>
+
+      {/* Ligne dorée pulsante en bas */}
+      <PulsingGoldLine position="bottom" fromDirection="right" />
     </section>
   )
 }

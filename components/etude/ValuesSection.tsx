@@ -3,6 +3,7 @@
 import { Scale, Shield, Users, Clock } from 'lucide-react'
 import { ValueSection } from './ValueSection'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
+import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 
 // Valeurs définies ici car les icônes Lucide ne peuvent pas être passées d'un server component
 const values = [
@@ -36,13 +37,16 @@ export function ValuesSection() {
   return (
     <div className="relative">
       {/* Section header */}
-      <section className="py-16 md:py-20 bg-secondary/30">
+      <section className="py-16 md:py-20 bg-secondary/30 relative overflow-hidden">
+        {/* Ligne dorée pulsante en haut */}
+        <PulsingGoldLine position="top" fromDirection="center" />
+
         <div className="container-wide">
           <div className="text-center">
             <AnimatedSection>
               <div className="flex items-center justify-center gap-4 mb-6">
                 <span className="h-px w-12 bg-gold" />
-                <span className="section-number">Valeurs</span>
+                <span className="font-serif text-sm text-gold tracking-[0.15em]">Valeurs</span>
                 <span className="h-px w-12 bg-gold" />
               </div>
             </AnimatedSection>

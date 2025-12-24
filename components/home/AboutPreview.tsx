@@ -1,130 +1,182 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { StatBlock } from '@/components/animations/AnimatedCounter'
-import { FloatingBubbles } from '@/components/animations/FloatingBubbles'
 import { Button } from '@/components/ui/button'
 
 export function AboutPreview() {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  })
+
+  // Effets parallax plus prononcés
+  const imageY = useTransform(scrollYProgress, [0, 1], [150, -150])
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95])
+  const contentY = useTransform(scrollYProgress, [0, 1], [80, -80])
+  const goldLineWidth = useTransform(scrollYProgress, [0, 0.5], ['0%', '100%'])
+
   return (
-    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/50 to-transparent pointer-events-none" />
+    <section ref={sectionRef} className="relative overflow-hidden">
+      {/* Zone blanche au dessus */}
+      <div className="h-24 bg-background" />
 
-      {/* Floating bubbles - subtle */}
-      <FloatingBubbles count={4} variant="primary" />
+      {/* Section principale avec découpe diagonale */}
+      <div className="relative">
+        {/* Fond bleu canard avec clip-path diagonal */}
+        <div
+          className="absolute inset-0 bg-primary"
+          style={{
+            clipPath: 'polygon(0 80px, 100% 0, 100% calc(100% - 80px), 0 100%)',
+          }}
+        />
 
-      <div className="container-wide relative">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* Image column - 55% */}
-          <AnimatedSection direction="left" className="lg:col-span-6 order-2 lg:order-1">
-            <div className="relative">
-              {/* Main image */}
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=1000&fit=crop"
-                  alt="Étude notariale"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-text-primary/30 to-transparent" />
-              </div>
+        {/* Ligne dorée diagonale en haut avec pulsation */}
+        <motion.div
+          style={{ width: goldLineWidth }}
+          className="absolute top-[80px] left-0 h-[3px] z-10 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-gold via-gold to-transparent" />
+          <motion.div
+            animate={{ opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-transparent"
+          />
+        </motion.div>
 
-              {/* Floating accent card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="absolute -bottom-8 -right-8 md:right-8 bg-surface p-6 shadow-xl border border-border-light max-w-[280px]"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="font-serif text-xl text-primary">Y</span>
-                  </div>
-                  <div>
-                    <p className="font-serif text-lg text-text-primary">
-                      Maître ARMON INCANA
-                    </p>
-                    <p className="text-sm text-text-muted">Notaire titulaire</p>
-                  </div>
+        {/* Ligne dorée diagonale en bas avec pulsation */}
+        <motion.div
+          style={{ width: goldLineWidth }}
+          className="absolute bottom-[80px] right-0 h-[3px] z-10 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-l from-gold via-gold to-transparent" />
+          <motion.div
+            animate={{ opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            className="absolute inset-0 bg-gradient-to-l from-white/40 via-white/60 to-transparent"
+          />
+        </motion.div>
+
+        {/* Contenu */}
+        <div className="container-wide relative z-10 py-32 md:py-40">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            {/* Image column avec parallax */}
+            <motion.div
+              style={{ y: imageY, scale: imageScale }}
+              className="lg:col-span-6 order-2 lg:order-1"
+            >
+              <div className="relative">
+                {/* Main image */}
+                <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
+                  <Image
+                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=1000&fit=crop"
+                    alt="Étude notariale"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
                 </div>
-                <p className="text-sm text-text-secondary italic">
-                  "Accompagner nos clients avec expertise et bienveillance"
+
+                {/* Floating accent card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30, x: 30 }}
+                  whileInView={{ opacity: 1, y: 0, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="absolute -bottom-8 -right-8 md:right-8 bg-white p-6 shadow-2xl max-w-[280px]"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="font-serif text-xl text-primary">Y</span>
+                    </div>
+                    <div>
+                      <p className="font-serif text-lg text-text-primary">
+                        Maître ARMON INCANA
+                      </p>
+                      <p className="text-sm text-text-muted">Notaire titulaire</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-text-secondary italic">
+                    "Accompagner nos clients avec expertise et bienveillance"
+                  </p>
+                </motion.div>
+
+                {/* Lignes décoratives dorées */}
+                <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-gold/60" />
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-gold/60" />
+              </div>
+            </motion.div>
+
+            {/* Text column avec parallax */}
+            <motion.div style={{ y: contentY }} className="lg:col-span-6 order-1 lg:order-2">
+              <AnimatedSection>
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="font-serif text-sm text-gold tracking-[0.15em]">01</span>
+                  <span className="h-px w-12 bg-gold" />
+                  <span className="text-white/60 text-sm uppercase tracking-wider">
+                    L'étude
+                  </span>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.1}>
+                <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
+                  Une expertise notariale
+                  <br />
+                  <span className="text-gold">au service de vos projets</span>
+                </h2>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.2}>
+                <p className="text-white/80 text-lg leading-relaxed mb-6">
+                  Située au cœur de L'Étang-Salé, notre étude notariale vous accompagne
+                  dans toutes vos démarches juridiques avec professionnalisme et proximité.
                 </p>
-              </motion.div>
+              </AnimatedSection>
 
-              {/* Decorative elements */}
-              <div className="absolute -top-6 -left-6 w-32 h-32 border border-gold/20 -z-10" />
-              <div className="absolute top-1/4 -left-12 h-px w-24 bg-gradient-to-r from-gold to-transparent" />
-            </div>
-          </AnimatedSection>
+              <AnimatedSection delay={0.3}>
+                <p className="text-white/70 leading-relaxed mb-8">
+                  Maître Yasmina ARMON INCANA et son équipe vous offrent un accompagnement
+                  personnalisé, alliant tradition notariale et modernité, pour sécuriser
+                  vos transactions et protéger vos intérêts.
+                </p>
+              </AnimatedSection>
 
-          {/* Text column - 45% */}
-          <div className="lg:col-span-6 order-1 lg:order-2">
-            <AnimatedSection>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="section-number">01</span>
-                <span className="h-px w-12 bg-gold" />
-                <span className="text-text-muted text-sm uppercase tracking-wider">
-                  L'étude
-                </span>
-              </div>
-            </AnimatedSection>
+              <AnimatedSection delay={0.4}>
+                <Button
+                  asChild
+                  className="group bg-gold text-text-primary hover:bg-white transition-all duration-300"
+                >
+                  <Link href="/etude" className="flex items-center gap-2">
+                    Découvrir l'étude
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+              </AnimatedSection>
 
-            <AnimatedSection delay={0.1}>
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary mb-6 leading-tight">
-                Une expertise notariale
-                <br />
-                <span className="text-primary">au service de vos projets</span>
-              </h2>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <p className="text-text-secondary text-lg leading-relaxed mb-6">
-                Située au cœur de L'Étang-Salé, notre étude notariale vous accompagne
-                dans toutes vos démarches juridiques avec professionnalisme et proximité.
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3}>
-              <p className="text-text-secondary leading-relaxed mb-8">
-                Maître Yasmina ARMON INCANA et son équipe vous offrent un accompagnement
-                personnalisé, alliant tradition notariale et modernité, pour sécuriser
-                vos transactions et protéger vos intérêts.
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.4}>
-              <Button
-                asChild
-                variant="outline"
-                className="group border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
-              >
-                <Link href="/etude" className="flex items-center gap-2">
-                  Découvrir l'étude
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </AnimatedSection>
-
-            {/* Stats */}
-            <AnimatedSection delay={0.5}>
-              <div className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-border-light">
-                <StatBlock value={15} suffix="+" label="Années d'expérience" />
-                <StatBlock value={2} label="Experts dédiés" delay={0.1} />
-                <StatBlock value={500} suffix="+" label="Dossiers par an" delay={0.2} />
-              </div>
-            </AnimatedSection>
+              {/* Stats */}
+              <AnimatedSection delay={0.5}>
+                <div className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-white/20">
+                  <StatBlock value={15} suffix="+" label="Années d'expérience" dark />
+                  <StatBlock value={2} label="Experts dédiés" delay={0.1} dark />
+                  <StatBlock value={500} suffix="+" label="Dossiers par an" delay={0.2} dark />
+                </div>
+              </AnimatedSection>
+            </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Zone blanche en dessous */}
+      <div className="h-24 bg-background" />
     </section>
   )
 }
