@@ -353,13 +353,13 @@ export default function IntroAnimation() {
                 className="absolute inset-0 z-0"
             >
                 <Image
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop"
+                    src="/images/etude-hero.png"
                     alt="L'étude notariale"
                     fill
                     className="object-cover"
                 />
                 {/* Overlay sombre */}
-                <div className="absolute inset-0 bg-gradient-to-r from-text-primary via-text-primary/85 to-text-primary/60" />
+                <div className="absolute inset-0 bg-gradient-to-r from-text-primary/70 via-text-primary/50 to-text-primary/30" />
             </motion.div>
 
             {/* Container */}

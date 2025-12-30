@@ -176,14 +176,6 @@ export function ValuesSectionV2() {
       <div className="container-wide py-16 md:py-20">
         <div className="text-center">
           <AnimatedSection>
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="h-px w-12 bg-gold" />
-              <span className="font-serif text-sm text-gold tracking-[0.15em]">01</span>
-              <span className="h-px w-12 bg-gold" />
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4">
               Nos valeurs
             </h2>

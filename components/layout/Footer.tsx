@@ -39,7 +39,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed">
-              Votre notaire à L'Étang-Salé, La Réunion.
+              Votre notaire à L'Étang Salé, La Réunion.
             </p>
           </div>
 
@@ -108,7 +108,7 @@ export function Footer() {
               © {new Date().getFullYear()} Étude de Maître INCANA. Tous droits réservés.
             </p>
             <p className="text-xs text-white/40">
-              Notaire à L'Étang-Salé, La Réunion
+              Notaire à L'Étang Salé, La Réunion
             </p>
           </div>
         </div>

@@ -218,7 +218,7 @@ export function HeroV3() {
 
             {/* Sous-titre */}
             <p className="text-text-muted text-base md:text-lg lg:text-xl mb-8">
-              Notaire à L'Étang-Salé
+              Notaire à L'Étang Salé
             </p>
 
             {/* CTA */}

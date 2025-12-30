@@ -17,7 +17,7 @@ const testimonials = [
   {
     tempId: 1,
     testimonial: "Professionnalisme et disponibilité remarquables. La succession de mes parents a été gérée avec beaucoup de délicatesse.",
-    by: "Jean-Philippe R., L'Étang-Salé",
+    by: "Jean-Philippe R., L'Étang Salé",
     imgSrc: "https://i.pravatar.cc/150?img=3"
   },
   {
@@ -41,7 +41,7 @@ const testimonials = [
   {
     tempId: 5,
     testimonial: "Service impeccable pour notre donation. Les conseils fiscaux nous ont permis d'optimiser la transmission.",
-    by: "Christiane B., L'Étang-Salé",
+    by: "Christiane B., L'Étang Salé",
     imgSrc: "https://i.pravatar.cc/150?img=13"
   },
   {

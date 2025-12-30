@@ -72,13 +72,6 @@ export function ContactBanner() {
             {/* Left - Text */}
             <div>
               <AnimatedSection>
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="font-serif text-sm text-gold tracking-[0.15em]">04</span>
-                  <span className="h-px w-12 bg-gold" />
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.1}>
                 <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
                   Besoin d'un conseil ?
                   <br />
@@ -145,9 +138,6 @@ export function ContactBanner() {
                       >
                         {notaryInfo.phone}
                       </a>
-                      <p className="text-white/40 text-xs mt-1">
-                        Fax : {notaryInfo.fax}
-                      </p>
                     </div>
                   </div>
 
@@ -178,7 +168,9 @@ export function ContactBanner() {
                         <span className="text-white/50">
                           {schedule.morning === 'Fermé'
                             ? 'Fermé'
-                            : `${schedule.morning} - ${schedule.afternoon}`}
+                            : schedule.afternoon
+                              ? `${schedule.morning} - ${schedule.afternoon}`
+                              : schedule.morning}
                         </span>
                       </div>
                     ))}

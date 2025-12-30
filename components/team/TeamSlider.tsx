@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { TeamMember } from "@/lib/types";
@@ -80,22 +80,10 @@ export const TeamSlider = ({
       )}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-        {/* === Left Column: Meta and Thumbnails === */}
-        <div className="lg:col-span-3 flex flex-col justify-between order-2 lg:order-1">
-          <div className="flex flex-row lg:flex-col justify-between lg:justify-start space-x-4 lg:space-x-0 lg:space-y-4">
-            {/* Pagination */}
-            <span className="text-sm text-gold font-mono">
-              {String(currentIndex + 1).padStart(2, "0")} /{" "}
-              {String(members.length).padStart(2, "0")}
-            </span>
-            {/* Vertical "Équipe" Text */}
-            <h2 className="text-sm font-medium tracking-widest uppercase [writing-mode:vertical-rl] lg:rotate-180 hidden lg:block text-white/60">
-              Équipe
-            </h2>
-          </div>
-
+        {/* === Left Column: Thumbnails === */}
+        <div className="lg:col-span-3 flex flex-col justify-end order-2 lg:order-1">
           {/* Thumbnail Navigation */}
-          <div className="flex space-x-3 mt-8 lg:mt-0">
+          <div className="flex space-x-3">
             {thumbnailMembers.map((member) => {
               const originalIndex = members.findIndex(
                 (m) => m.name === member.name
@@ -179,7 +167,7 @@ export const TeamSlider = ({
                 <div className="inline-flex items-center gap-2 mb-3">
                   <span className="h-px w-8 bg-gold" />
                   <span className="text-gold text-sm uppercase tracking-wider font-medium">
-                    {activeMember.role}
+                    Notaire
                   </span>
                 </div>
 
@@ -189,36 +177,9 @@ export const TeamSlider = ({
                 </h3>
 
                 {/* Bio */}
-                <p className="text-white/80 text-base lg:text-lg leading-relaxed mb-6">
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
                   {activeMember.bio}
                 </p>
-
-                {/* Specialties */}
-                {activeMember.specialties && activeMember.specialties.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {activeMember.specialties.map((specialty) => (
-                    <span
-                      key={specialty}
-                      className="px-3 py-1 bg-white/10 backdrop-blur-sm border border-gold/30 text-white/90 text-sm"
-                    >
-                      {specialty}
-                    </span>
-                  ))}
-                </div>
-                )}
-
-                {/* Email */}
-                {activeMember.email && (
-                  <a
-                    href={`mailto:${activeMember.email}`}
-                    className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors group"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span className="border-b border-transparent group-hover:border-gold-light transition-colors">
-                      {activeMember.email}
-                    </span>
-                  </a>
-                )}
               </motion.div>
             </AnimatePresence>
           </div>

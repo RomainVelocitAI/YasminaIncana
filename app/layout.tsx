@@ -18,15 +18,15 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Maître INCANA - Notaire à L'Étang-Salé | La Réunion",
+    default: "Maître INCANA - Notaire à L'Étang Salé | La Réunion",
     template: "%s | Maître INCANA - Notaire",
   },
   description:
-    "Étude notariale de Maître Yasmina INCANA à L'Étang-Salé, La Réunion. Expertise en immobilier, succession, famille et entreprise. Accompagnement personnalisé.",
+    "Étude notariale de Maître Yasmina INCANA à L'Étang Salé, La Réunion. Expertise en immobilier, succession, famille et entreprise. Accompagnement personnalisé.",
   keywords: [
     'notaire',
     'La Réunion',
-    "L'Étang-Salé",
+    "L'Étang Salé",
     'immobilier',
     'succession',
     'donation',
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: 'https://notaire-armon-incana.re',
     siteName: 'Maître INCANA - Notaire',
-    title: "Maître INCANA - Notaire à L'Étang-Salé",
+    title: "Maître INCANA - Notaire à L'Étang Salé",
     description:
-      "Étude notariale de Maître Yasmina INCANA à L'Étang-Salé, La Réunion.",
+      "Étude notariale de Maître Yasmina INCANA à L'Étang Salé, La Réunion.",
   },
 }
 

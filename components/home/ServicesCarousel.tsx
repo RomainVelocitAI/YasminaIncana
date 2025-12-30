@@ -17,8 +17,8 @@ import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 import { services } from '@/content/services'
 
 const serviceImages: Record<string, string> = {
-  immobilier: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&h=600&fit=crop',
-  famille: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&h=600&fit=crop',
+  immobilier: '/images/service-immobilier.jpg',
+  famille: '/images/service-famille.png',
   entreprise: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop',
 }
 
@@ -29,7 +29,7 @@ export function ServicesCarousel() {
     id: service.slug,
     title: service.title,
     summary: service.shortDescription,
-    url: `/services/${service.slug}`,
+    url: `/${service.slug}`,
     image: serviceImages[service.slug] || service.image,
   }))
 
@@ -55,14 +55,6 @@ export function ServicesCarousel() {
         <div className="mb-8 flex flex-col justify-between md:mb-14 md:flex-row md:items-end lg:mb-16">
           <div className="max-w-2xl">
             <AnimatedSection>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="h-px w-12 bg-gold" />
-                <span className="font-serif text-sm text-gold tracking-[0.15em]">02</span>
-                <span className="h-px w-12 bg-gold" />
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.1}>
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4">
                 Nos domaines d'expertise
               </h2>
@@ -134,11 +126,6 @@ export function ServicesCarousel() {
                           />
                           {/* Overlay gradient bleu canard */}
                           <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent" />
-
-                          {/* Number overlay */}
-                          <span className="absolute top-4 right-4 font-serif text-7xl text-white/20">
-                            0{index + 1}
-                          </span>
 
                           {/* Title overlay - visible par défaut */}
                           <div className="absolute bottom-0 left-0 right-0 p-6 transition-opacity duration-500 group-hover:opacity-0">

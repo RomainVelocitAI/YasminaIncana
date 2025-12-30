@@ -51,14 +51,6 @@ export function ServicesPreview() {
         {/* Header avec parallax */}
         <motion.div style={{ y: headerY }} className="text-center mb-16">
           <AnimatedSection>
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="h-px w-12 bg-gold" />
-              <span className="font-serif text-sm text-gold tracking-[0.15em]">02</span>
-              <span className="h-px w-12 bg-gold" />
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4">
               Nos domaines d'expertise
             </h2>
@@ -97,11 +89,6 @@ export function ServicesPreview() {
                         />
                         {/* Overlay gradient bleu canard */}
                         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
-
-                        {/* Number overlay */}
-                        <span className="absolute top-4 right-4 font-serif text-6xl text-white/20">
-                          0{index + 1}
-                        </span>
 
                         {/* Icon overlay */}
                         <div className="absolute bottom-4 left-4">

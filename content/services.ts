@@ -9,14 +9,9 @@ export const services: Service[] = [
     shortDescription: "Ventes, acquisitions, prêts immobiliers et garanties hypothécaires",
     fullDescription: "Le notaire est l'acteur incontournable de toute transaction immobilière. De l'acquisition à la vente, en passant par les prêts et les garanties, nous vous accompagnons à chaque étape pour sécuriser votre projet immobilier.",
     prestations: [
-      "Vente et acquisition de biens immobiliers",
-      "Avant-contrats et promesses de vente",
-      "Prêts immobiliers et garanties hypothécaires",
-      "Copropriété et règlements",
-      "VEFA et contrats de construction",
-      "Baux d'habitation",
-      "Viager",
-      "Servitudes et mitoyenneté"
+      "Ventes et acquisitions immobilières",
+      "Prêt immobilier",
+      "Servitudes"
     ]
   },
   {
@@ -27,14 +22,13 @@ export const services: Service[] = [
     shortDescription: "Successions, donations, testaments et protection du patrimoine familial",
     fullDescription: "La transmission du patrimoine et la protection de vos proches sont au cœur de nos préoccupations. Nous vous conseillons pour organiser votre succession, rédiger vos testaments et accompagner vos donations dans le respect de vos volontés.",
     prestations: [
-      "Successions et déclarations de succession",
+      "Successions",
       "Donations entre vifs",
       "Donations-partages",
-      "Testaments et legs",
-      "Contrats de mariage et régimes matrimoniaux",
+      "Testament",
+      "Contrat de mariage",
       "PACS",
-      "Divorce et liquidation de régime",
-      "Protection des majeurs vulnérables",
+      "Divorce",
       "Adoption"
     ]
   },

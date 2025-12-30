@@ -75,7 +75,7 @@ export function AboutPreview() {
                 {/* Main image */}
                 <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=1000&fit=crop"
+                    src="/images/about-preview.png"
                     alt="Étude notariale"
                     fill
                     className="object-cover"
@@ -84,30 +84,6 @@ export function AboutPreview() {
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
                 </div>
-
-                {/* Floating accent card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30, x: 30 }}
-                  whileInView={{ opacity: 1, y: 0, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="absolute -bottom-8 -right-8 md:right-8 bg-white p-6 shadow-2xl max-w-[280px]"
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="font-serif text-xl text-primary">Y</span>
-                    </div>
-                    <div>
-                      <p className="font-serif text-lg text-text-primary">
-                        Maître INCANA
-                      </p>
-                      <p className="text-sm text-text-muted">Notaire titulaire</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-text-secondary italic">
-                    "Accompagner nos clients avec expertise et bienveillance"
-                  </p>
-                </motion.div>
 
                 {/* Lignes décoratives dorées */}
                 <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-gold/60" />
@@ -118,16 +94,6 @@ export function AboutPreview() {
             {/* Text column avec parallax */}
             <motion.div style={{ y: contentY }} className="lg:col-span-6 order-1 lg:order-2">
               <AnimatedSection>
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="font-serif text-sm text-gold tracking-[0.15em]">01</span>
-                  <span className="h-px w-12 bg-gold" />
-                  <span className="text-white/60 text-sm uppercase tracking-wider">
-                    L'étude
-                  </span>
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.1}>
                 <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
                   Une expertise notariale
                   <br />
@@ -137,7 +103,7 @@ export function AboutPreview() {
 
               <AnimatedSection delay={0.2}>
                 <p className="text-white/80 text-lg leading-relaxed mb-6">
-                  Située au cœur de L'Étang-Salé, notre étude notariale vous accompagne
+                  Située au cœur de L'Étang Salé, notre étude notariale vous accompagne
                   dans toutes vos démarches juridiques avec professionnalisme et proximité.
                 </p>
               </AnimatedSection>

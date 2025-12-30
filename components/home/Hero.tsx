@@ -80,7 +80,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="text-lg md:text-xl text-text-secondary mb-4 max-w-xl"
             >
-              Votre notaire à L'Étang-Salé
+              Votre notaire à L'Étang Salé
             </motion.p>
 
             {/* Tagline */}
@@ -131,7 +131,7 @@ export function Hero() {
                 </div>
               </div>
               <div>
-                <div className="font-serif text-2xl md:text-3xl text-primary">97427 L'Étang-Salé</div>
+                <div className="font-serif text-2xl md:text-3xl text-primary">97427 L'Étang Salé</div>
                 <div className="text-sm text-text-muted uppercase tracking-wider mt-1">
                   La Réunion
                 </div>
@@ -182,7 +182,7 @@ export function Hero() {
                     Bienvenue à l'étude
                   </p>
                   <p className="text-white font-serif text-lg">
-                    L'Étang-Salé, La Réunion
+                    L'Étang Salé, La Réunion
                   </p>
                 </div>
               </div>

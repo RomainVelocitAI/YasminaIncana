@@ -1,15 +1,40 @@
 'use client'
 
-import { useRef, Suspense } from 'react'
+import { useState, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { MapPin, Phone, Mail, Clock, Printer, ArrowDown, FileText } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, ArrowDown, FileText, Building2, Home, Video } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { notaryInfo } from '@/content/team'
+
+// Méthodes de rendez-vous
+const appointmentMethods = [
+  {
+    id: 'office',
+    title: 'Au sein de notre Étude',
+    description: 'Dans un cadre chaleureux et moderne, lieu de vos rendez-vous de conseils et de signature.',
+    icon: Building2,
+    color: 'primary',
+  },
+  {
+    id: 'home',
+    title: 'À votre domicile',
+    description: 'Personnes âgées ou à mobilité réduite, nous nous déplaçons afin de vous aider à réaliser vos démarches notariales.',
+    icon: Home,
+    color: 'primary',
+  },
+  {
+    id: 'remote',
+    title: 'À distance par visioconférence',
+    description: 'Lors de vos déplacements dans le monde, la continuité de vos projets est assurée grâce à la visioconférence pour vos conseils et les signatures électroniques à distance.',
+    icon: Video,
+    color: 'primary',
+  },
+]
 
 function ContactFormWithSubject() {
   const searchParams = useSearchParams()
@@ -131,6 +156,54 @@ export default function ContactPage() {
         </motion.div>
       </section>
 
+      {/* Section Méthodes de rendez-vous */}
+      <section className="py-16 md:py-20 bg-secondary/30">
+        <div className="container-wide">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl text-text-primary mb-4">
+                Comment souhaitez-vous nous rencontrer ?
+              </h2>
+              <p className="text-text-secondary max-w-2xl mx-auto">
+                Maître INCANA s'adapte à vos besoins et vous propose plusieurs modalités de rendez-vous.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {appointmentMethods.map((method, index) => {
+              const Icon = method.icon
+              return (
+                <AnimatedSection key={method.id} delay={index * 0.1}>
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-surface border border-border-light p-8 h-full relative group shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  >
+                    {/* Coins dorés */}
+                    <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-gold/40 group-hover:border-gold/80 transition-colors duration-300" />
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-gold/40 group-hover:border-gold/80 transition-colors duration-300" />
+
+                    {/* Icône */}
+                    <div className={`w-16 h-16 rounded-full ${method.id === 'remote' ? 'bg-primary' : 'bg-primary/10'} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`w-8 h-8 ${method.id === 'remote' ? 'text-white' : 'text-primary'}`} />
+                    </div>
+
+                    {/* Contenu */}
+                    <h3 className="font-serif text-xl text-text-primary text-center mb-4">
+                      {method.title}
+                    </h3>
+                    <p className="text-text-secondary text-sm text-center leading-relaxed">
+                      {method.description}
+                    </p>
+                  </motion.div>
+                </AnimatedSection>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Contact section avec parallax */}
       <section ref={formRef} className="py-16 md:py-24 relative overflow-hidden">
         {/* Ligne dorée pulsante en haut */}
@@ -187,19 +260,6 @@ export default function ContactPage() {
                         </div>
                       </div>
 
-                      {/* Fax */}
-                      <div className="flex gap-4">
-                        <div className="w-12 h-12 bg-primary/10 flex items-center justify-center shrink-0">
-                          <Printer className="w-5 h-5 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-text-primary mb-1">Fax</p>
-                          <p className="text-text-secondary text-sm">
-                            {notaryInfo.fax}
-                          </p>
-                        </div>
-                      </div>
-
                       {/* Email */}
                       <div className="flex gap-4">
                         <div className="w-12 h-12 bg-primary/10 flex items-center justify-center shrink-0">
@@ -235,7 +295,9 @@ export default function ContactPage() {
                                   <td className="py-1">
                                     {schedule.morning === 'Fermé'
                                       ? 'Fermé'
-                                      : `${schedule.morning} - ${schedule.afternoon}`}
+                                      : schedule.afternoon
+                                        ? `${schedule.morning} - ${schedule.afternoon}`
+                                        : schedule.morning}
                                   </td>
                                 </tr>
                               ))}
@@ -259,7 +321,7 @@ export default function ContactPage() {
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title="Localisation de l'étude - 96 Avenue Raymond Barre, L'Étang-Salé"
+                        title="Localisation de l'étude - 96 Avenue Raymond Barre, L'Étang Salé"
                       />
                     </div>
                   </div>

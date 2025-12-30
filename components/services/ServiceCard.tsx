@@ -22,7 +22,7 @@ export function ServiceCard({ service, index = 0, variant = 'default' }: Service
 
   if (variant === 'compact') {
     return (
-      <Link href={`/services/${service.slug}`} className="group block">
+      <Link href={`/${service.slug}`} className="group block">
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export function ServiceCard({ service, index = 0, variant = 'default' }: Service
   }
 
   return (
-    <Link href={`/services/${service.slug}`} className="group block h-full">
+    <Link href={`/${service.slug}`} className="group block h-full">
       <motion.article
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -58,11 +58,6 @@ export function ServiceCard({ service, index = 0, variant = 'default' }: Service
         whileHover={{ y: -8 }}
         className="bg-surface h-full p-8 lg:p-10 border border-border-light hover:border-primary/30 transition-all duration-500 relative overflow-hidden"
       >
-        {/* Number */}
-        <span className="absolute top-6 right-6 font-serif text-6xl text-border-light group-hover:text-primary/10 transition-colors duration-500">
-          0{index + 1}
-        </span>
-
         {/* Icon */}
         <div className="relative mb-8">
           <div className="w-16 h-16 flex items-center justify-center bg-primary/5 group-hover:bg-primary transition-colors duration-500">

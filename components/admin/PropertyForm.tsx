@@ -569,7 +569,7 @@ export function PropertyForm({ property, propertyTypes }: PropertyFormProps) {
               value={formData.city}
               onChange={handleChange}
               required
-              placeholder="L'Étang-Salé"
+              placeholder="L'Étang Salé"
             />
           </div>
         </div>

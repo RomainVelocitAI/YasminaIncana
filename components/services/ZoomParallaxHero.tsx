@@ -3,7 +3,6 @@
 import { useScroll, useTransform, motion } from 'framer-motion'
 import { useRef } from 'react'
 import { ArrowDown } from 'lucide-react'
-import { services } from '@/content/services'
 
 // Images pour le zoom parallax - photos en lien avec les services notariaux
 const images = [
@@ -65,9 +64,9 @@ export function ZoomParallaxHero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight max-w-5xl"
           >
-            Des services juridiques
+            Votre notaire
             <br />
-            <span className="text-gold">à votre service</span>
+            <span className="text-gold">à votre écoute</span>
           </motion.h1>
 
           <motion.p
@@ -80,25 +79,6 @@ export function ZoomParallaxHero() {
             vos projets immobiliers, protéger votre famille et développer votre patrimoine.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-4 pointer-events-auto"
-          >
-            {services.map((service, i) => (
-              <motion.a
-                key={service.slug}
-                href={`#service-${service.slug}`}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 border border-white/30 text-white hover:bg-white hover:text-text-primary transition-all duration-300 backdrop-blur-sm"
-              >
-                <span className="text-gold mr-2">0{i + 1}</span>
-                {service.title}
-              </motion.a>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* Scroll indicator */}

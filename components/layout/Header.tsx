@@ -11,15 +11,16 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 const baseNavigation = [
   { name: 'Accueil', href: '/' },
   { name: "L'étude", href: '/etude' },
-  { name: 'Nos services', href: '/services' },
+  { name: 'Nos missions', href: '/services' },
   { name: 'Préparer mon RDV', href: '/rendez-vous' },
+  { name: 'Tarifs', href: '/tarifs' },
   { name: 'Contact', href: '/contact' },
 ]
 
 const propertiesNavItem = { name: 'Biens à vendre', href: '/biens' }
 
 // Pages avec un héro sombre qui nécessitent un header avec fond
-const darkHeroPages = ['/services', '/etude', '/biens']
+const darkHeroPages = ['/services', '/etude', '/biens', '/tarifs']
 
 interface HeaderProps {
   showPropertiesLink?: boolean
@@ -36,7 +37,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
   // Construire la navigation selon si des biens sont disponibles
   const navigation = useMemo(() => {
     if (showPropertiesLink) {
-      // Insérer "Biens à vendre" après "Nos services"
+      // Insérer "Biens à vendre" après "Nos missions"
       const navCopy = [...baseNavigation]
       navCopy.splice(3, 0, propertiesNavItem)
       return navCopy
@@ -60,9 +61,12 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
       : 'bg-transparent'
 
   // Couleurs du texte selon le contexte
-  const textColor = !isScrolled && hasDarkHero ? 'text-white' : 'text-text-primary'
-  const textSecondaryColor = !isScrolled && hasDarkHero ? 'text-white/80' : 'text-text-secondary'
-  const textMutedColor = !isScrolled && hasDarkHero ? 'text-white/60' : 'text-text-muted'
+  const isDarkMode = !isScrolled && hasDarkHero
+  const textColor = isDarkMode ? 'text-white' : 'text-text-primary'
+  const textSecondaryColor = isDarkMode ? 'text-white/80' : 'text-text-secondary'
+  const textMutedColor = isDarkMode ? 'text-white/60' : 'text-text-muted'
+  const activeColor = isDarkMode ? 'text-white' : 'text-primary'
+  const underlineColor = isDarkMode ? 'bg-white' : 'bg-primary'
 
   return (
     <motion.header
@@ -93,15 +97,15 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
                 href={item.href}
                 className={`relative text-sm tracking-wide transition-colors duration-300 ${
                   pathname === item.href
-                    ? 'text-primary'
-                    : `${textSecondaryColor} hover:text-primary`
+                    ? activeColor
+                    : `${textSecondaryColor} hover:${isDarkMode ? 'text-white' : 'text-primary'}`
                 }`}
               >
                 {item.name}
                 {pathname === item.href && (
                   <motion.span
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-primary"
+                    className={`absolute -bottom-1 left-0 right-0 h-px ${underlineColor}`}
                     transition={{ duration: 0.3 }}
                   />
                 )}

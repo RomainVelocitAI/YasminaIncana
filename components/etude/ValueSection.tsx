@@ -136,15 +136,6 @@ export function ValueSection({ value, index, isReversed = false }: ValueSectionP
                     style={{ transform: 'translateZ(50px)' }}
                   />
 
-                  {/* Number badge */}
-                  <div
-                    className={`absolute top-4 ${
-                      isReversed ? 'left-4' : 'right-4'
-                    } font-serif text-6xl text-white/20`}
-                    style={{ transform: 'translateZ(40px)' }}
-                  >
-                    0{index + 1}
-                  </div>
                 </div>
 
                 {/* Lignes décoratives dorées - flottantes */}
@@ -175,14 +166,6 @@ export function ValueSection({ value, index, isReversed = false }: ValueSectionP
             style={{ y: contentY }}
             className={`lg:col-span-6 ${isReversed ? 'lg:col-start-1 lg:row-start-1' : 'lg:col-start-7'}`}
           >
-            {/* Eyebrow */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="h-px w-10 bg-gold" />
-              <span className="text-gold text-xs uppercase tracking-[0.2em] font-medium">
-                Valeur 0{index + 1}
-              </span>
-            </div>
-
             {/* Title */}
             <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary mb-6">
               {value.title}

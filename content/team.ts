@@ -5,7 +5,7 @@ export const team: TeamMember[] = [
     name: "Yasmina INCANA",
     role: "Notaire titulaire",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces",
-    bio: "Maître Yasmina INCANA dirige l'étude avec passion et rigueur. Diplômée en droit notarial, elle accompagne ses clients dans toutes leurs démarches juridiques avec expertise et bienveillance. Son engagement envers l'excellence et la proximité client font d'elle une référence sur le territoire réunionnais.",
+    bio: "Diplômée en droit notarial, Maître Yasmina INCANA a choisi de s'installer à La Réunion pour être au plus près de ses clients. Elle prend le temps d'écouter et d'expliquer chaque étape, convaincue que le notaire doit rendre le droit accessible à tous.",
     email: "yasmina.incana@notaires.fr",
     specialties: ["Droit immobilier", "Droit de la famille", "Droit des successions"]
   },
@@ -23,14 +23,13 @@ export const notaryInfo = {
   name: "Étude de Maître INCANA",
   title: "Notaire",
   address: "96, Avenue Raymond Barre",
-  city: "L'Étang-Salé",
+  city: "L'Étang Salé",
   postalCode: "97427",
   country: "La Réunion, France",
   phone: "0262 960 300",
-  fax: "02 62 96 03 13",
-  email: "yasmina.incana@notaires.fr",
+  email: "office.incana@notaires.fr",
   hours: [
-    { days: "Lundi - Vendredi", morning: "8h30 - 12h00", afternoon: "14h00 - 18h00" },
-    { days: "Samedi - Dimanche", morning: "Fermé", afternoon: "Fermé" }
+    { days: "Lundi - Vendredi", morning: "8h30-12h00 / 13h30-17h00", afternoon: "" },
+    { days: "Samedi", morning: "Sur rendez-vous (matin uniquement)", afternoon: "" }
   ]
 }

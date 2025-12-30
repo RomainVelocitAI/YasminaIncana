@@ -48,9 +48,12 @@ interface FeaturedPropertiesProps {
 }
 
 export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
+  // Ne rien afficher si pas de biens - vérification avant les hooks
+  const hasProperties = properties && properties.length > 0
+
   const sectionRef = useRef(null)
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: hasProperties ? sectionRef : undefined,
     offset: ['start end', 'end start'],
   })
 
@@ -62,8 +65,7 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
 
   const cardYValues = [card1Y, card2Y, card3Y]
 
-  // Ne rien afficher si pas de biens
-  if (!properties || properties.length === 0) {
+  if (!hasProperties) {
     return null
   }
 
@@ -88,14 +90,6 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
         <motion.div style={{ y: headerY }} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <AnimatedSection>
-              <div className="flex items-center gap-4 mb-4">
-                <span className="h-px w-12 bg-gold" />
-                <span className="font-serif text-sm text-gold tracking-[0.15em]">03</span>
-                <span className="h-px w-12 bg-gold" />
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.1}>
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary">
                 Biens à la vente
               </h2>

@@ -29,8 +29,7 @@ export function TestimonialsSection() {
 
           <AnimatedSection delay={0.2}>
             <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-              Découvrez les retours de nos clients sur leur expérience
-              avec l'étude notariale INCANA.
+              Nos clients partagent leur expérience.
             </p>
           </AnimatedSection>
         </div>

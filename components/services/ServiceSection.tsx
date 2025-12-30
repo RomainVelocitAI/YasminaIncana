@@ -4,21 +4,15 @@ import React, { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Home, Users, Building2, ArrowRight, Check } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
 import { Service } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 
-const iconMap: Record<string, React.ElementType> = {
-  Home,
-  Users,
-  Building2,
-}
-
 // Images locales de La Réunion pour chaque service
 const serviceImages: Record<string, string> = {
-  immobilier: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=1200&h=800&fit=crop',
-  famille: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=1200&h=800&fit=crop',
+  immobilier: '/images/service-immobilier.jpg',
+  famille: '/images/service-famille.png',
   entreprise: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&h=800&fit=crop',
 }
 
@@ -66,7 +60,6 @@ function ImageCard3D({ children }: { children: React.ReactNode }) {
 
 export function ServiceSection({ service, index, isReversed = false }: ServiceSectionProps) {
   const sectionRef = useRef(null)
-  const Icon = iconMap[service.icon] || Home
   const imageUrl = serviceImages[service.slug] || serviceImages.immobilier
 
   const { scrollYProgress } = useScroll({
@@ -155,15 +148,6 @@ export function ServiceSection({ service, index, isReversed = false }: ServiceSe
                     style={{ transform: 'translateZ(50px)' }}
                   />
 
-                  {/* Number badge */}
-                  <div
-                    className={`absolute bottom-6 ${
-                      isReversed ? 'right-6' : 'left-6'
-                    } bg-primary text-white w-16 h-16 flex items-center justify-center`}
-                    style={{ transform: 'translateZ(40px)' }}
-                  >
-                    <span className="font-serif text-3xl">0{index + 1}</span>
-                  </div>
                 </div>
 
                 {/* Lignes décoratives dorées - flottantes */}
@@ -176,15 +160,6 @@ export function ServiceSection({ service, index, isReversed = false }: ServiceSe
                   style={{ transform: 'translateZ(40px)' }}
                 />
 
-                {/* Floating icon */}
-                <div
-                  className={`absolute ${
-                    isReversed ? '-left-6 -bottom-6' : '-right-6 -bottom-6'
-                  } w-20 h-20 bg-white shadow-2xl flex items-center justify-center`}
-                  style={{ transform: 'translateZ(60px)' }}
-                >
-                  <Icon className="w-8 h-8 text-primary" />
-                </div>
               </div>
             </ImageCard3D>
           </motion.div>
@@ -194,14 +169,6 @@ export function ServiceSection({ service, index, isReversed = false }: ServiceSe
             style={{ y: contentY }}
             className={`lg:col-span-6 ${isReversed ? 'lg:col-start-1 lg:row-start-1' : ''}`}
           >
-            {/* Eyebrow */}
-            <div className="flex items-center gap-4 mb-6">
-              <span className="h-px w-12 bg-gold" />
-              <span className="text-gold text-sm uppercase tracking-[0.2em] font-medium">
-                Service 0{index + 1}
-              </span>
-            </div>
-
             {/* Title */}
             <h2 className="font-serif text-4xl md:text-5xl text-text-primary mb-6 leading-tight">
               {service.title}
@@ -237,7 +204,7 @@ export function ServiceSection({ service, index, isReversed = false }: ServiceSe
               asChild
               className="bg-primary hover:bg-primary-dark text-white px-8 py-6 text-base group"
             >
-              <Link href={`/services/${service.slug}`}>
+              <Link href={`/${service.slug}`}>
                 Découvrir ce service
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
               </Link>

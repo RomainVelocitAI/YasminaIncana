@@ -1,9 +1,9 @@
 import { unstable_noStore as noStore } from 'next/cache'
-import { Hero } from '@/components/home/Hero'
+import { HeroV2 } from '@/components/home/HeroV2'
 import { AboutPreview } from '@/components/home/AboutPreview'
-import { ServicesPreview } from '@/components/home/ServicesPreview'
+import { ServicesCarousel } from '@/components/home/ServicesCarousel'
 import { FeaturedProperties } from '@/components/home/FeaturedProperties'
-import { CalculatorCTA } from '@/components/home/CalculatorCTA'
+import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 import { ContactBanner } from '@/components/home/ContactBanner'
 import { getFeaturedProperties } from '@/lib/properties'
 
@@ -15,11 +15,11 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero />
+      <HeroV2 />
       <AboutPreview />
-      <ServicesPreview />
+      <ServicesCarousel />
       <FeaturedProperties properties={featuredProperties} />
-      <CalculatorCTA />
+      <TestimonialsSection />
       <ContactBanner />
     </>
   )

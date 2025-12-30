@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Home, Users, Building2, Scale, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -11,21 +11,21 @@ const serviceCards = [
   {
     title: 'Immobilier',
     icon: Home,
-    href: '/services/immobilier',
+    href: '/immobilier',
     size: 'lg' as const,
     position: 'left-outer',
   },
   {
     title: 'Famille',
     icon: Users,
-    href: '/services/famille',
+    href: '/famille',
     size: 'md' as const,
     position: 'left-inner',
   },
   {
     title: 'Entreprise',
     icon: Building2,
-    href: '/services/entreprise',
+    href: '/entreprise',
     size: 'md' as const,
     position: 'right-inner',
   },
@@ -45,40 +45,29 @@ function FloatingCard({
   href,
   size,
   index,
-  scrollYProgress,
 }: {
   title: string
   icon: typeof Home
   href: string
   size: 'sm' | 'md' | 'lg'
   index: number
-  scrollYProgress: any
 }) {
-  // Parallax différent pour chaque carte
-  const parallaxSpeeds = [100, 60, 70, 90]
-  const yParallax = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [parallaxSpeeds[index], -parallaxSpeeds[index]]
-  )
-
-  // Tailles selon le prop size - AGRANDIES
+  // Tailles selon le prop size
   const sizeClasses = {
-    sm: 'w-24 h-32 md:w-32 md:h-44',
-    md: 'w-28 h-40 md:w-40 md:h-56',
-    lg: 'w-32 h-48 md:w-48 md:h-72',
+    sm: 'w-20 h-28 md:w-28 md:h-40',
+    md: 'w-24 h-36 md:w-36 md:h-48',
+    lg: 'w-28 h-40 md:w-40 md:h-56',
   }
 
   // Décalages verticaux pour effet asymétrique
-  // Index 0 = Immobilier (gauche ext) -> monte BEAUCOUP vers l'ellipse
-  // Index 1 = Famille (gauche int) -> aligné avec H1
-  // Index 2 = Entreprise (droite int) -> aligné avec H1
-  // Index 3 = Conseil (droite ext) -> monte BEAUCOUP vers l'ellipse
-  const verticalOffsets = [-140, 0, 0, -140]
+  // Index 0 = Immobilier (gauche ext) -> légèrement remonté
+  // Index 1 = Famille (gauche int) -> aligné
+  // Index 2 = Entreprise (droite int) -> aligné
+  // Index 3 = Conseil (droite ext) -> légèrement remonté
+  const verticalOffsets = [-20, 0, 0, -20]
 
   return (
     <motion.div
-      style={{ y: yParallax }}
       className="relative"
     >
       <motion.div
@@ -142,63 +131,61 @@ function FloatingCard({
 }
 
 export function HeroV2() {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  })
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [videoEnded, setVideoEnded] = useState(false)
 
-  // Parallax pour la vidéo
-  const videoScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1])
-  const videoOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3])
+  // Quand la vidéo se termine, afficher l'image de fin
+  const handleVideoEnd = () => {
+    setVideoEnded(true)
+  }
 
   return (
     <section
-      ref={containerRef}
       className="relative min-h-screen overflow-hidden bg-background"
     >
       {/* SECTION 1: Vidéo en demi-ellipse */}
       <div className="relative w-full">
-        <motion.div
-          style={{ scale: videoScale, opacity: videoOpacity }}
+        <div
           className="relative overflow-hidden mx-auto"
-          // Clip-path ellipse pour la forme arrondie
         >
           <div
             className="relative"
             style={{
-              // Ellipse très prononcée : 50% horizontal = demi-cercle parfait
-              clipPath: 'ellipse(50% 100% at 50% 0%)',
+              // Ellipse plus douce avec angle moins tranché
+              clipPath: 'ellipse(70% 100% at 50% 0%)',
             }}
           >
+            {/* Image de fin (affichée quand la vidéo est terminée) */}
+            {videoEnded && (
+              <img
+                src="/images/video-poster.png"
+                alt="L'étude notariale"
+                className="absolute inset-0 w-full h-[70vh] md:h-[85vh] object-cover z-10"
+              />
+            )}
+
             <video
+              ref={videoRef}
               autoPlay
-              loop
               muted
               playsInline
-              className="w-full h-[55vh] md:h-[65vh] object-cover"
+              onEnded={handleVideoEnd}
+              className={`w-full h-[70vh] md:h-[85vh] object-cover ${videoEnded ? 'invisible' : ''}`}
             >
               <source
-                src="https://res.cloudinary.com/dqd514udc/video/upload/v1766426510/Untitled_Made_with_FlexClip_2_vfi121.mp4"
+                src="https://res.cloudinary.com/dqd514udc/video/upload/v1767107638/Film_Yasmina_on3wpz.mov"
                 type="video/mp4"
               />
               {/* Fallback image */}
               <img
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&h=900&fit=crop"
+                src="/images/video-poster.png"
                 alt="L'étude notariale"
                 className="w-full h-full object-cover"
               />
             </video>
 
-            {/* Dégradé en bas de la vidéo (bleu canard) - suit la courbe de l'ellipse */}
-            <div
-              className="absolute bottom-0 left-0 right-0 h-1/2 pointer-events-none"
-              style={{
-                background: 'linear-gradient(to top, var(--background) 0%, var(--primary) 30%, transparent 100%)',
-              }}
-            />
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* SECTION 2: Zone cartes + contenu central */}
@@ -207,12 +194,11 @@ export function HeroV2() {
         <div className="w-full px-4 md:px-8 lg:px-12">
           <div className="flex flex-col md:flex-row items-center justify-evenly">
 
-            {/* Carte 1 - Immobilier (gauche ext) */}
-            <div className="order-2 md:order-1">
+            {/* Carte 1 - Immobilier (gauche ext) - décalée vers l'extérieur */}
+            <div className="order-2 md:order-1 md:-ml-8 lg:-ml-16">
               <FloatingCard
                 {...serviceCards[0]}
                 index={0}
-                scrollYProgress={scrollYProgress}
               />
             </div>
 
@@ -221,7 +207,6 @@ export function HeroV2() {
               <FloatingCard
                 {...serviceCards[1]}
                 index={1}
-                scrollYProgress={scrollYProgress}
               />
             </div>
 
@@ -247,15 +232,13 @@ export function HeroV2() {
               </motion.div>
 
               {/* H1 Principal */}
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-text-primary mb-3 leading-tight">
-                MAÎTRE
-                <br />
-                <span className="text-primary">INCANA</span>
+              <h1 className="font-serif text-3xl md:text-4xl lg:text-6xl text-primary mb-3 leading-tight">
+                M<span className="text-[0.9em]">e</span> Yasmina INCANA
               </h1>
 
               {/* Sous-titre */}
               <p className="text-text-muted text-base md:text-lg lg:text-xl mb-8">
-                Notaire à L'Étang-Salé
+                Notaire à L'Étang Salé
               </p>
 
               {/* CTA */}
@@ -276,16 +259,14 @@ export function HeroV2() {
               <FloatingCard
                 {...serviceCards[2]}
                 index={2}
-                scrollYProgress={scrollYProgress}
               />
             </div>
 
-            {/* Carte 4 - Conseil (droite ext) */}
-            <div className="order-5">
+            {/* Carte 4 - Conseil (droite ext) - décalée vers l'extérieur */}
+            <div className="order-5 md:-mr-8 lg:-mr-16">
               <FloatingCard
                 {...serviceCards[3]}
                 index={3}
-                scrollYProgress={scrollYProgress}
               />
             </div>
 
@@ -305,8 +286,7 @@ export function HeroV2() {
           }}
         />
         {/* Orbe dégradé */}
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
+        <div
           className="absolute top-1/2 -right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-gold/5 to-transparent blur-3xl"
         />
       </div>
