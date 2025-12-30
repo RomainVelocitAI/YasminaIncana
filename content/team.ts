@@ -2,10 +2,10 @@ import { TeamMember } from '@/lib/types'
 
 export const team: TeamMember[] = [
   {
-    name: "Yasmina ARMON INCANA",
+    name: "Yasmina INCANA",
     role: "Notaire titulaire",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces",
-    bio: "Maître Yasmina ARMON INCANA dirige l'étude avec passion et rigueur. Diplômée en droit notarial, elle accompagne ses clients dans toutes leurs démarches juridiques avec expertise et bienveillance. Son engagement envers l'excellence et la proximité client font d'elle une référence sur le territoire réunionnais.",
+    bio: "Maître Yasmina INCANA dirige l'étude avec passion et rigueur. Diplômée en droit notarial, elle accompagne ses clients dans toutes leurs démarches juridiques avec expertise et bienveillance. Son engagement envers l'excellence et la proximité client font d'elle une référence sur le territoire réunionnais.",
     email: "yasmina.incana@notaires.fr",
     specialties: ["Droit immobilier", "Droit de la famille", "Droit des successions"]
   },
@@ -20,13 +20,13 @@ export const team: TeamMember[] = [
 ]
 
 export const notaryInfo = {
-  name: "Étude de Maître ARMON INCANA",
+  name: "Étude de Maître INCANA",
   title: "Notaire",
   address: "96, Avenue Raymond Barre",
   city: "L'Étang-Salé",
   postalCode: "97427",
   country: "La Réunion, France",
-  phone: "02 62 96 03 00",
+  phone: "0262 960 300",
   fax: "02 62 96 03 13",
   email: "yasmina.incana@notaires.fr",
   hours: [

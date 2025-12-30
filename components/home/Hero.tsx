@@ -70,7 +70,7 @@ export function Hero() {
             >
               Étude de Maître
               <br />
-              <span className="text-primary">ARMON INCANA</span>
+              <span className="text-primary">INCANA</span>
             </motion.h1>
 
             {/* Subtitle */}

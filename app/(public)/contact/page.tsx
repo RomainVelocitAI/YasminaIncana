@@ -1,12 +1,21 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { MapPin, Phone, Mail, Clock, Printer, ArrowDown } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Printer, ArrowDown, FileText } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { notaryInfo } from '@/content/team'
+
+function ContactFormWithSubject() {
+  const searchParams = useSearchParams()
+  const initialSubject = searchParams.get('subject') || undefined
+  return <ContactForm initialSubject={initialSubject} />
+}
 
 export default function ContactPage() {
   const heroRef = useRef(null)
@@ -266,6 +275,26 @@ export default function ContactPage() {
                   <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gold/60" />
                   <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-gold/60" />
 
+                  {/* Encart préparation RDV */}
+                  <div className="bg-primary/5 border border-primary/20 p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="w-12 h-12 bg-primary/10 flex items-center justify-center shrink-0">
+                      <FileText className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-serif text-lg text-text-primary mb-1">
+                        Préparez votre rendez-vous
+                      </h3>
+                      <p className="text-text-secondary text-sm">
+                        Téléchargez les documents à préparer selon votre démarche.
+                      </p>
+                    </div>
+                    <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white shrink-0">
+                      <Link href="/rendez-vous">
+                        Voir les documents
+                      </Link>
+                    </Button>
+                  </div>
+
                   <h2 className="font-serif text-2xl text-text-primary mb-2">
                     Envoyez-nous un message
                   </h2>
@@ -273,7 +302,9 @@ export default function ContactPage() {
                     Remplissez le formulaire ci-dessous et nous vous répondrons
                     dans les meilleurs délais.
                   </p>
-                  <ContactForm />
+                  <Suspense fallback={<div className="animate-pulse h-96 bg-secondary/50 rounded" />}>
+                    <ContactFormWithSubject />
+                  </Suspense>
                 </div>
               </AnimatedSection>
             </motion.div>

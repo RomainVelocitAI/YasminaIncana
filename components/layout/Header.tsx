@@ -12,6 +12,7 @@ const baseNavigation = [
   { name: 'Accueil', href: '/' },
   { name: "L'étude", href: '/etude' },
   { name: 'Nos services', href: '/services' },
+  { name: 'Préparer mon RDV', href: '/rendez-vous' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -77,7 +78,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
             <span className={`font-serif text-xl md:text-2xl tracking-tight transition-colors ${
               !isScrolled && hasDarkHero ? 'text-white' : 'text-[#8B2942]'
             } group-hover:opacity-80`}>
-              Maître ARMON INCANA
+              Maître INCANA
             </span>
             <span className={`text-xs uppercase tracking-[0.2em] group-hover:text-primary transition-colors ${textMutedColor}`}>
               Notaire
@@ -116,7 +117,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
               className={`hidden md:flex items-center gap-2 text-sm hover:text-primary transition-colors ${textSecondaryColor}`}
             >
               <Phone className="w-4 h-4" />
-              <span>02 62 96 03 00</span>
+              <span>0262 960 300</span>
             </a>
 
             {/* CTA Button - Desktop */}
@@ -178,7 +179,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
                       className="flex items-center gap-3 text-text-secondary hover:text-primary transition-colors mb-4"
                     >
                       <Phone className="w-5 h-5" />
-                      <span>02 62 96 03 00</span>
+                      <span>0262 960 300</span>
                     </a>
                     <Button
                       asChild

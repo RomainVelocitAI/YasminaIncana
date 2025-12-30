@@ -23,10 +23,15 @@ const subjects = [
   { value: 'autre', label: 'Autre' },
 ]
 
-export function ContactForm() {
+interface ContactFormProps {
+  initialSubject?: string
+}
+
+export function ContactForm({ initialSubject }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
+  const [selectedSubject, setSelectedSubject] = useState(initialSubject || '')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -112,7 +117,12 @@ export function ContactForm() {
 
       <div className="space-y-2">
         <Label htmlFor="subject">Objet *</Label>
-        <Select name="subject" required>
+        <Select
+          name="subject"
+          value={selectedSubject}
+          onValueChange={setSelectedSubject}
+          required
+        >
           <SelectTrigger className="bg-surface border-border focus:border-primary">
             <SelectValue placeholder="Sélectionnez un objet" />
           </SelectTrigger>

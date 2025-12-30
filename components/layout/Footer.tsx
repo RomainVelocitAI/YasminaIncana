@@ -32,7 +32,7 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block mb-4">
               <h3 className="font-serif text-xl text-[#C27A8A]">
-                Maître ARMON INCANA
+                Maître INCANA
               </h3>
               <span className="text-xs text-gold uppercase tracking-[0.2em]">
                 Notaire
@@ -105,7 +105,7 @@ export function Footer() {
         <div className="mt-12 pt-6 border-t border-white/10">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs text-white/40">
-              © {new Date().getFullYear()} Étude de Maître ARMON INCANA. Tous droits réservés.
+              © {new Date().getFullYear()} Étude de Maître INCANA. Tous droits réservés.
             </p>
             <p className="text-xs text-white/40">
               Notaire à L'Étang-Salé, La Réunion

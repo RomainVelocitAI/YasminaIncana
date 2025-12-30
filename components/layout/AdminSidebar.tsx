@@ -43,7 +43,7 @@ export function AdminSidebar() {
           </div>
           <div>
             <p className="font-serif text-lg text-text-primary">Administration</p>
-            <p className="text-xs text-text-muted">Étude ARMON INCANA</p>
+            <p className="text-xs text-text-muted">Étude INCANA</p>
           </div>
         </Link>
       </div>

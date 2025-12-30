@@ -5,7 +5,7 @@ import { notaryInfo } from '@/content/team'
 export const metadata: Metadata = {
   title: 'Mentions légales',
   description:
-    "Mentions légales du site de l'étude notariale de Maître ARMON INCANA.",
+    "Mentions légales du site de l'étude notariale de Maître INCANA.",
 }
 
 export default function MentionsLegalesPage() {
@@ -36,7 +36,7 @@ export default function MentionsLegalesPage() {
                 Le présent site est édité par :
               </p>
               <p className="text-text-secondary">
-                <strong>Étude de Maître Yasmina ARMON INCANA</strong>
+                <strong>Étude de Maître Yasmina INCANA</strong>
                 <br />
                 Notaire
                 <br />
@@ -58,7 +58,7 @@ export default function MentionsLegalesPage() {
                 Directeur de la publication
               </h2>
               <p className="text-text-secondary">
-                Maître Yasmina ARMON INCANA, Notaire
+                Maître Yasmina INCANA, Notaire
               </p>
             </AnimatedSection>
 

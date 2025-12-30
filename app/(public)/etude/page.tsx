@@ -157,7 +157,7 @@ export default function EtudePage() {
               >
                 L'étude notariale
                 <br />
-                <span className="text-gold">ARMON INCANA</span>
+                <span className="text-gold">INCANA</span>
               </motion.h1>
 
               <motion.p
@@ -326,7 +326,7 @@ export default function EtudePage() {
               </h2>
 
               <p className="text-text-secondary leading-relaxed mb-6">
-                L'étude de Maître Yasmina ARMON INCANA perpétue la tradition
+                L'étude de Maître Yasmina INCANA perpétue la tradition
                 notariale en l'alliant aux exigences du monde moderne. Notre
                 mission : vous offrir un accompagnement juridique de qualité,
                 adapté à vos besoins.

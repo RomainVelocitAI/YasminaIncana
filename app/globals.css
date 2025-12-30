@@ -98,6 +98,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --font-mono: var(--font-geist-mono);
 }
 
 :root {
@@ -344,4 +345,13 @@
 ::selection {
   background: var(--primary);
   color: var(--primary-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

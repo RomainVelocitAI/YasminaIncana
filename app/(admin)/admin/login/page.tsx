@@ -64,7 +64,7 @@ export default function AdminLoginPage() {
               Administration
             </h1>
             <p className="text-text-muted text-sm mt-1">
-              Étude de Maître ARMON INCANA
+              Étude de Maître INCANA
             </p>
           </div>
 

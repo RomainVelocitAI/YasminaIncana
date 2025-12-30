@@ -99,7 +99,7 @@ export function AboutPreview() {
                     </div>
                     <div>
                       <p className="font-serif text-lg text-text-primary">
-                        Maître ARMON INCANA
+                        Maître INCANA
                       </p>
                       <p className="text-sm text-text-muted">Notaire titulaire</p>
                     </div>
@@ -144,7 +144,7 @@ export function AboutPreview() {
 
               <AnimatedSection delay={0.3}>
                 <p className="text-white/70 leading-relaxed mb-8">
-                  Maître Yasmina ARMON INCANA et son équipe vous offrent un accompagnement
+                  Maître Yasmina INCANA et son équipe vous offrent un accompagnement
                   personnalisé, alliant tradition notariale et modernité, pour sécuriser
                   vos transactions et protéger vos intérêts.
                 </p>
