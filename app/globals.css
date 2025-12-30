@@ -347,6 +347,37 @@
   color: var(--primary-foreground);
 }
 
+/* Protection contre le téléchargement des médias */
+img,
+video,
+picture,
+source {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Désactiver le menu contextuel sur les médias */
+img,
+video {
+  -webkit-touch-callout: none;
+}
+
+/* Overlay invisible pour bloquer le clic droit sur les images */
+.protected-media {
+  position: relative;
+}
+
+.protected-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  pointer-events: auto;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
