@@ -23,8 +23,8 @@ const pairs = [
   },
   {
     photo: {
-      src: '/images/maitre-incana.png',
-      alt: 'Maître Yasmina Incana',
+      src: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop',
+      alt: 'Famille heureuse',
     },
     text: {
       icon: Shield,

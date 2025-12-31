@@ -4,7 +4,7 @@ export const team: TeamMember[] = [
   {
     name: "Yasmina INCANA",
     role: "Notaire titulaire",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces",
+    image: "/images/maitre-incana.png",
     bio: "Diplômée en droit notarial, Maître Yasmina INCANA a choisi de s'installer à La Réunion pour être au plus près de ses clients. Elle prend le temps d'écouter et d'expliquer chaque étape, convaincue que le notaire doit rendre le droit accessible à tous.",
     email: "yasmina.incana@notaires.fr",
     specialties: ["Droit immobilier", "Droit de la famille", "Droit des successions"]
