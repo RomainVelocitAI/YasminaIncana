@@ -175,6 +175,11 @@ export function ContactBanner() {
                       </div>
                     ))}
                   </div>
+                  {notaryInfo.appointmentNote && (
+                    <p className="text-white/40 text-sm italic mt-3">
+                      {notaryInfo.appointmentNote}
+                    </p>
+                  )}
                 </div>
               </div>
             </AnimatedSection>

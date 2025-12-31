@@ -303,6 +303,11 @@ export default function ContactPage() {
                               ))}
                             </tbody>
                           </table>
+                          {notaryInfo.appointmentNote && (
+                            <p className="text-sm text-text-secondary italic mt-2">
+                              {notaryInfo.appointmentNote}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>

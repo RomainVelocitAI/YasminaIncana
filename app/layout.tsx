@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans, Caveat } from 'next/font/google'
 import './globals.css'
 import { MediaProtection } from '@/components/MediaProtection'
 
@@ -14,6 +14,13 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-handwriting',
   display: 'swap',
 })
 
@@ -52,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="fr" className={`${cormorant.variable} ${dmSans.variable} ${caveat.variable}`}>
       <body className="min-h-screen bg-background antialiased">
         <MediaProtection />
         {children}

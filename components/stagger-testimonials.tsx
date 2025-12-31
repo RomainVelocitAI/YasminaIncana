@@ -1,256 +1,269 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const SQRT_5000 = Math.sqrt(5000);
 
 // Vrais témoignages clients de l'étude notariale INCANA
 const testimonials = [
   {
-    tempId: 0,
-    testimonial: "Ouverte à répondre à toute question ou explication des termes juridiques.",
-    by: "Paola"
+    id: 0,
+    text: "Ouverte à répondre à toute question ou explication des termes juridiques.",
+    author: "Paola"
   },
   {
-    tempId: 1,
-    testimonial: "Prestation impeccable, traitement rapide et accompagnement très professionnel tout au long du dossier. Vraiment très satisfait.",
-    by: "Christophe"
+    id: 1,
+    text: "Prestation impeccable, traitement rapide et accompagnement très professionnel tout au long du dossier. Vraiment très satisfait.",
+    author: "Christophe"
   },
   {
-    tempId: 2,
-    testimonial: "En trois mots : réactivité, efficacité, disponibilité.",
-    by: "Samuel"
+    id: 2,
+    text: "En trois mots : réactivité, efficacité, disponibilité.",
+    author: "Samuel"
   },
   {
-    tempId: 3,
-    testimonial: "Merci pour votre réactivité et votre professionnalisme. De plus il règne une grande humanité au sein du cabinet de Maître INCANA.",
-    by: "Guillaume & Vanessa"
+    id: 3,
+    text: "Merci pour votre réactivité et votre professionnalisme. De plus il règne une grande humanité au sein du cabinet de Maître INCANA.",
+    author: "Guillaume & Vanessa"
   },
   {
-    tempId: 4,
-    testimonial: "Merci pour le professionnalisme, conseils, disponibilité. Notaire compétente, agréable, ayant le sens relationnel.",
-    by: "Client satisfait"
+    id: 4,
+    text: "Merci pour le professionnalisme, conseils, disponibilité. Notaire compétente, agréable, ayant le sens relationnel.",
+    author: "Client satisfait"
   },
   {
-    tempId: 5,
-    testimonial: "Professionnelle, efficace, à l'écoute, souriante.",
-    by: "Client satisfait"
+    id: 5,
+    text: "Professionnelle, efficace, à l'écoute, souriante.",
+    author: "Client satisfait"
   },
   {
-    tempId: 6,
-    testimonial: "Notaire à l'écoute, patiente, réactive, disponible qui explique très bien. Travail plus que parfait pour notre dossier qui a été finalisé très rapidement.",
-    by: "Gilda"
+    id: 6,
+    text: "Notaire à l'écoute, patiente, réactive, disponible qui explique très bien. Travail plus que parfait pour notre dossier qui a été finalisé très rapidement.",
+    author: "Gilda"
   },
   {
-    tempId: 7,
-    testimonial: "Une véritable capacité de réactivité pour un dossier proposé en dernière minute. Bravo !",
-    by: "M. F."
+    id: 7,
+    text: "Une véritable capacité de réactivité pour un dossier proposé en dernière minute. Bravo !",
+    author: "M. F."
   },
   {
-    tempId: 8,
-    testimonial: "Dossier traité très rapidement, réactif en cas de besoin. S'adapte à nos disponibilités. Je recommande fortement.",
-    by: "Marie Rose"
+    id: 8,
+    text: "Dossier traité très rapidement, réactif en cas de besoin. S'adapte à nos disponibilités. Je recommande fortement.",
+    author: "Marie Rose"
   },
   {
-    tempId: 9,
-    testimonial: "Nous avons apprécié l'accompagnement et le professionnalisme lors de notre achat. Maître Incana a su répondre à toutes nos interrogations. Nous saluons sa bienveillance, son écoute et sa rigueur. Nous recommandons sans hésiter ses services.",
-    by: "Laurence et Dimitri"
+    id: 9,
+    text: "Nous avons apprécié l'accompagnement et le professionnalisme lors de notre achat. Maître Incana a su répondre à toutes nos interrogations. Nous saluons sa bienveillance, son écoute et sa rigueur. Nous recommandons sans hésiter ses services.",
+    author: "Laurence et Dimitri"
   },
   {
-    tempId: 10,
-    testimonial: "Le dossier de succession de ma maman a été géré avec professionnalisme, clarté et rapidité. Nous recommandons vivement Maître INCANA pour les démarches.",
-    by: "Reine-Claude"
+    id: 10,
+    text: "Le dossier de succession de ma maman a été géré avec professionnalisme, clarté et rapidité. Nous recommandons vivement Maître INCANA pour les démarches.",
+    author: "Reine-Claude"
   },
   {
-    tempId: 11,
-    testimonial: "Merci à Maître Yasmina INCANA d'avoir accompagné avec professionnalisme et délicatesse la signature de l'acte d'achat. Je suis sensible aussi à son attention particulière au lien familial et à la protection du bien.",
-    by: "M. B."
+    id: 11,
+    text: "Merci à Maître Yasmina INCANA d'avoir accompagné avec professionnalisme et délicatesse la signature de l'acte d'achat. Je suis sensible aussi à son attention particulière au lien familial et à la protection du bien.",
+    author: "M. B."
   },
   {
-    tempId: 12,
-    testimonial: "Notaire à l'écoute, et très réactive...",
-    by: "Mme G.F."
+    id: 12,
+    text: "Notaire à l'écoute, et très réactive...",
+    author: "Mme G.F."
   },
   {
-    tempId: 13,
-    testimonial: "Très bien accueillie et explications claires. Transaction rapide.",
-    by: "Evelyne"
+    id: 13,
+    text: "Très bien accueillie et explications claires. Transaction rapide.",
+    author: "Evelyne"
   },
   {
-    tempId: 14,
-    testimonial: "Maître Incana a été un soutien pour moi dans la manière efficace et rapide dont elle a fait état pour régler la succession de mon époux. Merci à vous Maître.",
-    by: "Simone"
+    id: 14,
+    text: "Maître Incana a été un soutien pour moi dans la manière efficace et rapide dont elle a fait état pour régler la succession de mon époux. Merci à vous Maître.",
+    author: "Simone"
   },
 ];
 
-interface TestimonialCardProps {
-  position: number;
-  index: number;
-  testimonial: typeof testimonials[0];
-  handleMove: (steps: number) => void;
-  cardSize: number;
-}
-
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
-  position,
-  index,
-  testimonial,
-  handleMove,
-  cardSize
-}) => {
-  const isCenter = position === 0;
-  // Alterner bleu canard / surface : index pair = bleu canard
-  const isPrimary = index % 2 === 0;
-
-  return (
-    <div
-      onClick={() => handleMove(position)}
-      className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-6 sm:p-8 transition-all duration-500 ease-in-out",
-        isCenter
-          ? "z-10 border-gold"
-          : "z-0 hover:border-gold/50",
-        isPrimary
-          ? "bg-primary text-white border-gold"
-          : "bg-surface text-text-primary border-secondary"
-      )}
-      style={{
-        width: cardSize,
-        height: cardSize,
-        clipPath: `polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0)`,
-        transform: `
-          translate(-50%, -50%)
-          translateX(${(cardSize / 1.5) * position}px)
-          translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
-          rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
-        `,
-        boxShadow: isCenter ? "0px 8px 0px 4px var(--gold)" : "0px 0px 0px 0px transparent"
-      }}
-    >
-      <span
-        className={cn(
-          "absolute block origin-top-right rotate-45",
-          isPrimary ? "bg-gold/50" : "bg-border"
-        )}
-        style={{
-          right: -2,
-          top: 48,
-          width: SQRT_5000,
-          height: 2
-        }}
-      />
-      {/* Icône guillemet au lieu de photo */}
-      <div className={cn(
-        "mb-4 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center",
-        isPrimary ? "bg-gold/20" : "bg-primary/10"
-      )}>
-        <Quote className={cn(
-          "w-5 h-5 sm:w-6 sm:h-6",
-          isPrimary ? "text-gold" : "text-primary"
-        )} />
-      </div>
-      <h3 className={cn(
-        "text-sm sm:text-base lg:text-lg font-medium font-serif leading-relaxed",
-        isPrimary ? "text-white" : "text-text-primary"
-      )}>
-        "{testimonial.testimonial}"
-      </h3>
-      <p className={cn(
-        "absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 mt-2 text-sm italic",
-        isPrimary ? "text-gold" : "text-text-secondary"
-      )}>
-        - {testimonial.by}
-      </p>
-    </div>
-  );
-};
-
 export const StaggerTestimonials: React.FC = () => {
-  const [cardSize, setCardSize] = useState(365);
-  const [testimonialsList, setTestimonialsList] = useState(testimonials);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const handleMove = (steps: number) => {
-    const newList = [...testimonialsList];
-    if (steps > 0) {
-      for (let i = steps; i > 0; i--) {
-        const item = newList.shift();
-        if (!item) return;
-        newList.push({ ...item, tempId: Math.random() });
-      }
-    } else {
-      for (let i = steps; i < 0; i++) {
-        const item = newList.pop();
-        if (!item) return;
-        newList.unshift({ ...item, tempId: Math.random() });
-      }
-    }
-    setTestimonialsList(newList);
-  };
-
-  useEffect(() => {
-    const updateSize = () => {
-      const { matches } = window.matchMedia("(min-width: 640px)");
-      setCardSize(matches ? 365 : 290);
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
+  const goToNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   }, []);
 
-  // Défilement automatique toutes les 4 secondes
+  const goToPrev = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, []);
+
+  // Auto-scroll
   useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
-      handleMove(1);
-    }, 4000);
+      goToNext();
+    }, 5000);
+
     return () => clearInterval(interval);
-  }, [testimonialsList]);
+  }, [isPaused, goToNext]);
+
+  const currentTestimonial = testimonials[currentIndex];
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 100 : -100,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 100 : -100,
+      opacity: 0,
+    }),
+  };
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-secondary/30"
-      style={{ height: 600 }}
+      className="relative w-full py-16 md:py-20 overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
-      {testimonialsList.map((testimonial, index) => {
-        const position = testimonialsList.length % 2
-          ? index - (testimonialsList.length + 1) / 2
-          : index - testimonialsList.length / 2;
-        return (
-          <TestimonialCard
-            key={testimonial.tempId}
-            testimonial={testimonial}
-            handleMove={handleMove}
-            position={position}
-            index={index}
-            cardSize={cardSize}
-          />
-        );
-      })}
-      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-        <button
-          onClick={() => handleMove(-1)}
-          className={cn(
-            "flex h-14 w-14 items-center justify-center text-2xl transition-colors",
-            "bg-background border-2 border-secondary hover:bg-primary hover:text-white hover:border-primary",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
-          )}
-          aria-label="Témoignage précédent"
-        >
-          <ChevronLeft />
-        </button>
-        <button
-          onClick={() => handleMove(1)}
-          className={cn(
-            "flex h-14 w-14 items-center justify-center text-2xl transition-colors",
-            "bg-background border-2 border-secondary hover:bg-primary hover:text-white hover:border-primary",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
-          )}
-          aria-label="Témoignage suivant"
-        >
-          <ChevronRight />
-        </button>
+      {/* Fond subtil avec motif */}
+      <div className="absolute inset-0 bg-secondary/30" />
+
+      {/* Décoration dorée subtile */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent via-gold/40 to-gold/20" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-t from-transparent via-gold/40 to-gold/20" />
+
+      <div className="container-wide relative">
+        {/* Zone du témoignage */}
+        <div className="relative min-h-[320px] md:min-h-[280px] flex items-center justify-center">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentTestimonial.id}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.3 },
+              }}
+              className="absolute inset-0 flex flex-col items-center justify-center px-4"
+            >
+              {/* Guillemet ouvrant */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="mb-6"
+              >
+                <svg
+                  className="w-12 h-12 md:w-16 md:h-16 text-gold/60"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
+                </svg>
+              </motion.div>
+
+              {/* Texte du témoignage - Style manuscrit italique */}
+              <motion.blockquote
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-center max-w-3xl mx-auto mb-8"
+              >
+                <p className="font-handwriting text-2xl md:text-3xl lg:text-4xl text-text-primary leading-relaxed italic">
+                  {currentTestimonial.text}
+                </p>
+              </motion.blockquote>
+
+              {/* Ligne décorative */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4"
+              />
+
+              {/* Nom de l'auteur - Style normal (pas italique) */}
+              <motion.cite
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="not-italic font-sans text-base md:text-lg text-text-secondary tracking-wide"
+              >
+                — {currentTestimonial.author}
+              </motion.cite>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex items-center justify-center gap-6 mt-8">
+          {/* Bouton précédent */}
+          <button
+            onClick={goToPrev}
+            className={cn(
+              "group flex items-center justify-center w-12 h-12 md:w-14 md:h-14",
+              "border border-border-light bg-background/80 backdrop-blur-sm",
+              "hover:border-gold hover:bg-gold/5 transition-all duration-300",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+            )}
+            aria-label="Témoignage précédent"
+          >
+            <ChevronLeft className="w-5 h-5 text-text-secondary group-hover:text-gold transition-colors" />
+          </button>
+
+          {/* Indicateurs de pagination */}
+          <div className="flex items-center gap-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all duration-300",
+                  index === currentIndex
+                    ? "bg-gold w-6"
+                    : "bg-border hover:bg-gold/50"
+                )}
+                aria-label={`Aller au témoignage ${index + 1}`}
+                aria-current={index === currentIndex ? "true" : undefined}
+              />
+            ))}
+          </div>
+
+          {/* Bouton suivant */}
+          <button
+            onClick={goToNext}
+            className={cn(
+              "group flex items-center justify-center w-12 h-12 md:w-14 md:h-14",
+              "border border-border-light bg-background/80 backdrop-blur-sm",
+              "hover:border-gold hover:bg-gold/5 transition-all duration-300",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+            )}
+            aria-label="Témoignage suivant"
+          >
+            <ChevronRight className="w-5 h-5 text-text-secondary group-hover:text-gold transition-colors" />
+          </button>
+        </div>
+
+        {/* Compteur discret */}
+        <div className="text-center mt-6">
+          <span className="text-sm text-text-muted font-sans">
+            {currentIndex + 1} / {testimonials.length}
+          </span>
+        </div>
       </div>
     </div>
   );

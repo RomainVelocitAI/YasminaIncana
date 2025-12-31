@@ -10,10 +10,10 @@ export const team: TeamMember[] = [
     specialties: ["Droit immobilier", "Droit de la famille", "Droit des successions"]
   },
   {
-    name: "Chloé Dupéré",
+    name: "Chloé DUPÉRÉ",
     role: "Clerc de notaire",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=faces",
-    bio: "Forte de 10 années d'expérience acquises dans des études parisiennes prestigieuses, Chloé Dupéré apporte son expertise pointue en matière de copropriété. Sa maîtrise des dossiers complexes et son sens du détail garantissent un accompagnement de qualité pour chaque transaction.",
+    bio: "Forte de 10 années d'expérience acquises dans des études parisiennes prestigieuses, Chloé DUPÉRÉ apporte son expertise pointue en matière de copropriété. Sa maîtrise des dossiers complexes et son sens du détail garantissent un accompagnement de qualité pour chaque transaction.",
     email: null,
     specialties: ["Copropriété", "Transactions immobilières", "Droit de la construction"]
   },
@@ -38,6 +38,7 @@ export const notaryInfo = {
   email: "office.incana@notaires.fr",
   hours: [
     { days: "Lundi - Vendredi", morning: "8h30-12h00 / 13h30-17h00", afternoon: "" },
-    { days: "Samedi", morning: "Sur rendez-vous (matin uniquement)", afternoon: "" }
-  ]
+    { days: "Samedi", morning: "À la demande (le matin)", afternoon: "" }
+  ],
+  appointmentNote: "Réception sur rendez-vous uniquement"
 }

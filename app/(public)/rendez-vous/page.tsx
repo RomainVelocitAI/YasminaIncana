@@ -592,7 +592,8 @@ export default function RendezVousPage() {
                   <div>
                     <p className="text-sm text-text-muted mb-1">Horaires d'ouverture</p>
                     <p className="text-text-primary">Lundi - Vendredi : 8h30-12h00 / 13h30-17h00</p>
-                    <p className="text-text-secondary">Samedi : Sur rendez-vous (matin uniquement)</p>
+                    <p className="text-text-secondary">Samedi : À la demande (le matin)</p>
+                    <p className="text-text-secondary text-sm italic mt-1">Réception sur rendez-vous uniquement</p>
                   </div>
                 </div>
               </div>

@@ -23,15 +23,10 @@ export function TestimonialsSection() {
 
           <AnimatedSection delay={0.1}>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4">
-              Ils nous font confiance
+              Ils partagent leur expérience à l'Office.
             </h2>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.2}>
-            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-              Nos clients partagent leur expérience.
-            </p>
-          </AnimatedSection>
         </div>
       </div>
 
