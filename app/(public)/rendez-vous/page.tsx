@@ -16,83 +16,236 @@ import {
   Clock,
   ArrowRight,
   X,
-  CheckCircle2
+  CheckCircle2,
+  ClipboardList,
+  Edit3
 } from 'lucide-react'
+import { downloadChecklist } from '@/lib/pdf-generators'
+import { FicheRenseignementsModal, generateBlankFichePDF } from '@/components/forms/FicheRenseignementsForm'
 
-// Documents organisés par catégorie
+// Documents organisés par catégorie avec les vraies pièces à fournir
 const documentCategories = [
   {
     id: 'immobilier',
     name: 'Immobilier',
     icon: Home,
     color: 'primary',
-    description: 'Ventes, acquisitions et transactions immobilières',
-    features: [
-      'Fiches acquéreur et vendeur',
-      'Questionnaires de vente',
-      'Documents intervenants'
-    ],
-    documents: [
-      { name: 'Fiche de renseignement acquéreur', file: '/documents/immobilier/fiche-acquereur.pdf' },
-      { name: 'Fiche de renseignement intervenant', file: '/documents/immobilier/fiche-intervenant.pdf' },
-      { name: 'Fiche de renseignement vendeur', file: '/documents/immobilier/fiche-vendeur.pdf' },
-      { name: 'Questionnaire vente via Agence', file: '/documents/immobilier/questionnaire-agence.pdf' },
-      { name: 'Questionnaire vente Particulier', file: '/documents/immobilier/questionnaire-particulier.pdf' },
+    description: 'Ventes, acquisitions et prescriptions trentenaires',
+    subcategories: [
+      {
+        title: 'Vente - Vendeur',
+        checklistId: 'vente-vendeur',
+        provision: null,
+        items: [
+          'Livret de famille',
+          'Carte d\'identité ou carte de résident',
+          'Titre de propriété (acte notarié)',
+          'Contrat de bail et 3 dernières quittances (si bien loué)',
+          'Si copropriété : règlement, nom du syndic, 3 dernières AG et appels de charges',
+          'Si lotissement : règlement, cahier des charges, statuts association syndicale',
+          'Si emprunt en cours : nom banque, offre de prêt, tableau d\'amortissement',
+          'Taxe foncière',
+          'Factures et assurances décennales des travaux < 10 ans',
+          'Si construction < 10 ans : permis de construire, plans, DAACT, certificat de conformité, assurance dommage-ouvrage',
+          'Diagnostics : termites, électricité, amiante, loi Carrez, assainissement',
+          'Procès-verbal de bornage et plan',
+          'Avis de valeur vénale (si vente directe sans agence)'
+        ]
+      },
+      {
+        title: 'Vente - Acquéreur',
+        checklistId: 'vente-acquereur',
+        provision: null,
+        items: [
+          'Livret de famille',
+          'Carte nationale d\'identité ou passeport',
+          'Relevé d\'identité bancaire (RIB) signé',
+          'Si prêt : nom organisme prêteur, montant, durée et taux max souhaités',
+          'Si financement par vente d\'un bien : copie du compromis ou promesse',
+          'Si construction envisagée : nature, surface et caractéristiques'
+        ]
+      },
+      {
+        title: 'Prescription trentenaire',
+        checklistId: 'prescription-trentenaire',
+        provision: '470 €',
+        items: [
+          'Plan cadastral du terrain',
+          'Extrait de matrice cadastrale',
+          'Procès-verbal de bornage contradictoire',
+          'Sommation interpellative par Commissaire de Justice (avec photos)',
+          'Procès-verbal d\'affichage par Commissaire de Justice',
+          'Documents sur les constructions (permis, achèvement, conformité)',
+          'Livret de famille des occupants',
+          'Copie des pièces d\'identité',
+          'Avis d\'imposition taxe foncière et taxe d\'habitation (10 dernières années min.)',
+          'Anciens titres de propriété (s\'ils existent)',
+          'États hypothécaires (fiche immeuble + fiche personnelle)'
+        ]
+      }
     ]
   },
   {
     id: 'famille',
-    name: 'Famille',
+    name: 'Famille & Succession',
     icon: Users,
     color: 'gold',
-    description: 'Successions, donations et patrimoine familial',
-    features: [
-      'Fiches renseignements',
-      'Documents donation',
-      'Documents succession'
-    ],
-    documents: [
-      { name: 'Fiche Renseignements', file: '/documents/famille/fiche-renseignements.pdf' },
-      { name: 'Premier RDV – Donation', file: '/documents/famille/rdv-donation.pdf' },
-      { name: 'Premier RDV – Succession', file: '/documents/famille/rdv-succession.pdf' },
-      { name: 'Fiche Bien à donner', file: '/documents/famille/fiche-bien-donner.pdf' },
-      { name: 'Fiche Donateur', file: '/documents/famille/fiche-donateur.pdf' },
-      { name: 'Fiche Donataire', file: '/documents/famille/fiche-donataire.pdf' },
+    description: 'Successions, donations, contrats de mariage et PACS',
+    subcategories: [
+      {
+        title: 'Succession',
+        checklistId: 'succession',
+        provision: '470 €',
+        items: [
+          'Concernant le défunt :',
+          '• Acte de décès',
+          '• Livret de famille (+ livrets des précédents mariages)',
+          '• Contrat de mariage',
+          '• Testament / Donation entre époux',
+          'Concernant le patrimoine :',
+          '• Titre(s) de propriété du/des bien(s)',
+          '• Justificatifs de comptes bancaires',
+          '• Carte grise véhicule',
+          '• Si fonds de commerce : titre, bail, état matériel/marchandises, extrait RCS/RM',
+          '• Si parts de société : statuts, titres, dernier bilan',
+          '• Reconnaissances de dettes, actes de prêt',
+          '• Frais funéraires (mémoire, quittance)',
+          '• Avertissements d\'impôts',
+          '• Justificatifs de toutes dettes',
+          'Pour chaque héritier :',
+          '• Pièce d\'identité',
+          '• RIB signé'
+        ]
+      },
+      {
+        title: 'Donation / Donation-partage',
+        checklistId: 'donation',
+        provision: '470 €',
+        items: [
+          'Pour le donateur ET le donataire :',
+          '• Extrait acte de naissance',
+          '• Extrait acte de mariage',
+          '• Copie pièce d\'identité',
+          '• Contrat de mariage ou PACS le cas échéant',
+          'Pour le donateur uniquement :',
+          '• Livret de famille',
+          '• Titre de propriété',
+          '• Avis de valeur vénale ou estimation < 3 mois',
+          '• Plan de bornage et PV du géomètre-expert',
+          '• Si division parcellaire : document d\'arpentage, déclaration préalable/permis',
+          '• Plan de prévention des risques naturels (mairie)',
+          '• Copie du bail si bien loué',
+          '• Si immeuble < 10 ans : permis de construire, plans, DAACT, certificat conformité',
+          '• Existence fosse septique, détecteur fumée, borne recharge, piscine...'
+        ]
+      },
+      {
+        title: 'Contrat de mariage',
+        checklistId: 'contrat-mariage',
+        provision: '350 €',
+        items: [
+          'Pour chaque futur époux :',
+          '• Fiche de renseignements complétée',
+          '• Copie recto-verso pièce d\'identité (CNI ou passeport)',
+          '• Extrait d\'acte de naissance < 2 mois',
+          '• RIB signé',
+          'Si nationalité étrangère :',
+          '• Acte de naissance < 2 mois traduit par traducteur assermenté',
+          '• Certificat de coutume ou célibat traduit',
+          'Étapes :',
+          '1. RDV de renseignements avant le mariage',
+          '2. Transmission des documents',
+          '3. Réception du projet par mail',
+          '4. RDV de signature avant le mariage'
+        ]
+      },
+      {
+        title: 'PACS',
+        checklistId: 'pacs',
+        provision: '350 €',
+        items: [
+          'Pour chaque futur partenaire :',
+          '• Fiche de renseignements complétée',
+          '• Copie recto-verso pièce d\'identité (CNI ou passeport)',
+          '• Extrait d\'acte de naissance < 2 mois',
+          '• RIB signé',
+          'Si nationalité étrangère :',
+          '• Acte de naissance < 2 mois traduit par traducteur assermenté',
+          '• Certificat de coutume ou célibat traduit'
+        ]
+      }
     ]
   },
   {
-    id: 'affaires',
-    name: 'Entreprise',
+    id: 'entreprise',
+    name: 'Entreprise & Société',
     icon: Building2,
     color: 'teal',
-    description: 'Création de société, cessions et baux',
-    features: [
-      'Constitution SCI',
-      'Cessions de parts',
-      'Baux commerciaux'
-    ],
-    documents: [
-      { name: 'Constitution SCI', file: '/documents/affaires/constitution-sci.pdf' },
-      { name: 'Fiche Renseignement Associés SCI', file: '/documents/affaires/fiche-associes-sci.pdf' },
-      { name: 'Cession de droit au bail', file: '/documents/affaires/cession-bail.pdf' },
-      { name: 'Cession de parts sociales', file: '/documents/affaires/cession-parts.pdf' },
-      { name: 'Fiche Renseignement BAILLEUR', file: '/documents/affaires/fiche-bailleur.pdf' },
-      { name: 'Fiche Renseignement PRENEUR', file: '/documents/affaires/fiche-preneur.pdf' },
-      { name: 'Acquisition Fonds de Commerce', file: '/documents/affaires/fonds-commerce-cessionnaire.pdf' },
-      { name: 'Fonds de Commerce (CÉDANT)', file: '/documents/affaires/fonds-commerce-cedant.pdf' },
+    description: 'Constitution SCI, baux commerciaux',
+    subcategories: [
+      {
+        title: 'Constitution SCI',
+        checklistId: 'sci',
+        provision: '470 €',
+        items: [
+          'Pour chaque associé :',
+          '• Nom, prénom, date et lieu de naissance',
+          '• Situation maritale (conjoint, date/lieu mariage, régime)',
+          '• Adresse postale, email, téléphone',
+          '• Copie pièce d\'identité',
+          '• Copie carte vitale',
+          '• Acte de naissance',
+          '• Livret de famille (si marié)',
+          '• RIB signé',
+          'Informations sur la SCI :',
+          '• Nom de la SCI',
+          '• Montant du capital social',
+          '• Répartition des parts entre associés',
+          '• Choix IR ou IS',
+          '• Adresse du siège social + titre propriété ou bail'
+        ]
+      },
+      {
+        title: 'Bail commercial',
+        checklistId: 'bail-commercial',
+        provision: null,
+        items: [
+          'Pour une personne physique :',
+          '• Fiche de renseignements complétée',
+          '• Pièce d\'identité',
+          'Pour une personne morale :',
+          '• Statuts à jour',
+          '• Pièce d\'identité du représentant légal',
+          '• Délibération de nomination (si hors statuts)',
+          '• KBIS < 3 mois',
+          'Concernant le bien :',
+          '• Titre de propriété',
+          '• Adresse postale',
+          '• Règlement de copropriété (si applicable)',
+          '• Bail antérieur, résiliation, état des lieux sortie',
+          'Modalités du bail :',
+          '• Montant du loyer, mensuel ou annuel',
+          '• Soumis à TVA ou non',
+          '• Pas de porte, dépôt de garantie, caution',
+          '• Taxe foncière à charge du bailleur ou preneur',
+          '• Travaux autorisés, prévus ou réalisés < 3 ans'
+        ]
+      }
     ]
   },
 ]
 
-// Modal pour afficher les documents
+// Modal pour afficher les pièces à fournir par sous-catégorie
 function DocumentModal({
   category,
   isOpen,
-  onClose
+  onClose,
+  onOpenFicheForm
 }: {
   category: typeof documentCategories[0] | null
   isOpen: boolean
   onClose: () => void
+  onOpenFicheForm: () => void
 }) {
   if (!category) return null
 
@@ -101,6 +254,12 @@ function DocumentModal({
     primary: 'bg-primary text-white',
     gold: 'bg-gold text-text-primary',
     teal: 'bg-teal text-white'
+  }
+
+  const accentClasses = {
+    primary: 'text-primary bg-primary/10',
+    gold: 'text-gold bg-gold/10',
+    teal: 'text-teal bg-teal/10'
   }
 
   return (
@@ -122,7 +281,7 @@ function DocumentModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-lg bg-background rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[90vh]"
+            className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl bg-background rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[90vh]"
           >
             {/* Header */}
             <div className={`${colorClasses[category.color as keyof typeof colorClasses]} p-6`}>
@@ -133,7 +292,7 @@ function DocumentModal({
                   </div>
                   <div>
                     <h3 className="text-xl font-serif font-semibold">{category.name}</h3>
-                    <p className="text-sm opacity-80">{category.documents.length} documents</p>
+                    <p className="text-sm opacity-80">{category.subcategories.length} types de dossiers</p>
                   </div>
                 </div>
                 <button
@@ -145,34 +304,106 @@ function DocumentModal({
               </div>
             </div>
 
-            {/* Documents list */}
-            <div className="flex-1 overflow-y-auto p-4">
-              <div className="space-y-2">
-                {category.documents.map((doc, index) => (
-                  <motion.a
-                    key={doc.name}
-                    href={doc.file}
-                    download
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors group"
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-6">
+              {/* Section Fiche de renseignements */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-primary/5 border-2 border-primary/30 rounded-xl p-5"
+              >
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <ClipboardList className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-lg text-text-primary font-semibold">
+                      Fiche de renseignements
+                    </h4>
+                    <p className="text-sm text-text-secondary">
+                      À compléter obligatoirement pour tout dossier
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    onClick={() => {
+                      onClose()
+                      setTimeout(onOpenFicheForm, 300)
+                    }}
+                    className="flex-1 bg-primary hover:bg-primary-dark text-white"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
-                      <FileText className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-                    </div>
-                    <span className="flex-1 text-text-primary font-medium text-sm">{doc.name}</span>
-                    <Download className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors shrink-0" />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+                    <Edit3 className="w-4 h-4 mr-2" />
+                    Remplir en ligne
+                  </Button>
+                  <Button
+                    onClick={() => generateBlankFichePDF()}
+                    variant="outline"
+                    className="flex-1 border-primary text-primary hover:bg-primary/10"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    PDF vierge
+                  </Button>
+                </div>
+              </motion.div>
 
-            {/* Footer */}
-            <div className="p-4 border-t border-border-light bg-secondary/30">
-              <p className="text-xs text-text-muted text-center">
-                Cliquez sur un document pour le télécharger
-              </p>
+              {/* Subcategories list */}
+              {category.subcategories.map((sub, index) => (
+                <motion.div
+                  key={sub.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: (index + 1) * 0.1 }}
+                  className="bg-secondary/30 rounded-xl p-5"
+                >
+                  {/* Subcategory header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-serif text-lg text-text-primary font-semibold">{sub.title}</h4>
+                    {sub.provision && (
+                      <span className={`text-sm font-medium px-3 py-1 rounded-full ${accentClasses[category.color as keyof typeof accentClasses]}`}>
+                        Provision : {sub.provision}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Items list */}
+                  <ul className="space-y-2 mb-4">
+                    {sub.items.map((item, i) => {
+                      const isHeader = !item.startsWith('•') && item.endsWith(':')
+                      const isSubItem = item.startsWith('•')
+
+                      return (
+                        <li
+                          key={i}
+                          className={`text-sm ${
+                            isHeader
+                              ? 'font-medium text-text-primary mt-3 first:mt-0'
+                              : isSubItem
+                              ? 'text-text-secondary pl-4'
+                              : 'text-text-secondary flex items-start gap-2'
+                          }`}
+                        >
+                          {!isHeader && !isSubItem && (
+                            <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                          )}
+                          {isSubItem ? item.substring(2) : item}
+                        </li>
+                      )
+                    })}
+                  </ul>
+
+                  {/* Bouton télécharger checklist */}
+                  <Button
+                    onClick={() => downloadChecklist(sub.checklistId)}
+                    variant="outline"
+                    size="sm"
+                    className="w-full border-gold/50 text-gold hover:bg-gold/10 hover:border-gold"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Télécharger la checklist PDF
+                  </Button>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </>
@@ -184,6 +415,7 @@ function DocumentModal({
 export default function RendezVousPage() {
   const [selectedCategory, setSelectedCategory] = useState<typeof documentCategories[0] | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isFicheFormOpen, setIsFicheFormOpen] = useState(false)
 
   const openModal = (category: typeof documentCategories[0]) => {
     setSelectedCategory(category)
@@ -210,8 +442,8 @@ export default function RendezVousPage() {
               Préparez votre <span className="text-primary">rendez-vous</span>
             </h1>
             <p className="text-lg text-text-secondary">
-              Téléchargez et remplissez les documents correspondant à votre démarche
-              avant de nous contacter.
+              Consultez la liste des pièces à fournir selon votre démarche
+              pour préparer au mieux votre rendez-vous.
             </p>
           </motion.div>
         </div>
@@ -271,12 +503,15 @@ export default function RendezVousPage() {
                     <h3 className="font-serif text-2xl text-text-primary mb-2">{category.name}</h3>
                     <p className="text-text-secondary text-sm mb-6">{category.description}</p>
 
-                    {/* Features */}
+                    {/* Subcategories as features */}
                     <ul className="space-y-3 mb-8">
-                      {category.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-3 text-sm text-text-primary">
+                      {category.subcategories.map((sub) => (
+                        <li key={sub.title} className="flex items-center gap-3 text-sm text-text-primary">
                           <CheckCircle2 className={`w-5 h-5 ${colors.text} shrink-0`} />
-                          {feature}
+                          {sub.title}
+                          {sub.provision && (
+                            <span className="text-xs text-text-muted">({sub.provision})</span>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -284,9 +519,9 @@ export default function RendezVousPage() {
                     {/* Document count */}
                     <div className="pt-6 border-t border-border-light">
                       <div className="flex items-center justify-between">
-                        <span className="text-text-muted text-sm">{category.documents.length} documents</span>
+                        <span className="text-text-muted text-sm">{category.subcategories.length} types de dossiers</span>
                         <span className={`${colors.text} text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all`}>
-                          Voir les documents
+                          Voir les pièces
                           <ArrowRight className="w-4 h-4" />
                         </span>
                       </div>
@@ -408,11 +643,18 @@ export default function RendezVousPage() {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* Modal des documents */}
       <DocumentModal
         category={selectedCategory}
         isOpen={isModalOpen}
         onClose={closeModal}
+        onOpenFicheForm={() => setIsFicheFormOpen(true)}
+      />
+
+      {/* Modal fiche de renseignements */}
+      <FicheRenseignementsModal
+        isOpen={isFicheFormOpen}
+        onClose={() => setIsFicheFormOpen(false)}
       />
     </>
   )

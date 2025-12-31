@@ -15,10 +15,11 @@ const iconMap: Record<string, React.ElementType> = {
   Building2,
 }
 
+// Images pour chaque service - mise à jour 31/12
 const serviceImages: Record<string, string> = {
   immobilier: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&h=600&fit=crop',
   famille: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&h=600&fit=crop',
-  entreprise: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop',
+  entreprise: '/images/service-entreprise.png',
 }
 
 export function ServicesPreview() {

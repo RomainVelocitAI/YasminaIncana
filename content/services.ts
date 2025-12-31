@@ -36,7 +36,7 @@ export const services: Service[] = [
     title: "Entreprise & Patrimoine",
     slug: "entreprise",
     icon: "Building2",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
+    image: "/images/service-entreprise.png",
     shortDescription: "Création de société, cessions et conseil patrimonial personnalisé",
     fullDescription: "Entrepreneurs et chefs d'entreprise, nous vous accompagnons dans la création, la transmission et la gestion de votre entreprise. Notre expertise en conseil patrimonial vous aide à optimiser et protéger votre patrimoine professionnel et personnel.",
     prestations: [

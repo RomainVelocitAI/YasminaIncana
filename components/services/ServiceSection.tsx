@@ -13,7 +13,7 @@ import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 const serviceImages: Record<string, string> = {
   immobilier: '/images/service-immobilier.jpg',
   famille: '/images/service-famille.png',
-  entreprise: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&h=800&fit=crop',
+  entreprise: '/images/service-entreprise.png',
 }
 
 interface ServiceSectionProps {

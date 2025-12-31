@@ -1,60 +1,87 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const SQRT_5000 = Math.sqrt(5000);
 
-// Témoignages pour l'étude notariale INCANA
+// Vrais témoignages clients de l'étude notariale INCANA
 const testimonials = [
   {
     tempId: 0,
-    testimonial: "Un accompagnement exemplaire pour notre achat immobilier. Maître INCANA a su nous rassurer et tout expliquer clairement.",
-    by: "Marie D., Saint-Pierre",
-    imgSrc: "https://i.pravatar.cc/150?img=1"
+    testimonial: "Ouverte à répondre à toute question ou explication des termes juridiques.",
+    by: "Paola"
   },
   {
     tempId: 1,
-    testimonial: "Professionnalisme et disponibilité remarquables. La succession de mes parents a été gérée avec beaucoup de délicatesse.",
-    by: "Jean-Philippe R., L'Étang Salé",
-    imgSrc: "https://i.pravatar.cc/150?img=3"
+    testimonial: "Prestation impeccable, traitement rapide et accompagnement très professionnel tout au long du dossier. Vraiment très satisfait.",
+    by: "Christophe"
   },
   {
     tempId: 2,
-    testimonial: "Excellent conseil pour la création de notre SCI familiale. Nous recommandons vivement cette étude !",
-    by: "Famille Hoarau, Saint-Louis",
-    imgSrc: "https://i.pravatar.cc/150?img=5"
+    testimonial: "En trois mots : réactivité, efficacité, disponibilité.",
+    by: "Samuel"
   },
   {
     tempId: 3,
-    testimonial: "Réactivité et expertise au rendez-vous. Notre vente s'est conclue rapidement grâce à leur efficacité.",
-    by: "Sophie M., Les Avirons",
-    imgSrc: "https://i.pravatar.cc/150?img=9"
+    testimonial: "Merci pour votre réactivité et votre professionnalisme. De plus il règne une grande humanité au sein du cabinet de Maître INCANA.",
+    by: "Guillaume & Vanessa"
   },
   {
     tempId: 4,
-    testimonial: "Une équipe à l'écoute qui prend le temps d'expliquer chaque étape. Merci pour votre patience !",
-    by: "Patrick L., Saint-Pierre",
-    imgSrc: "https://i.pravatar.cc/150?img=11"
+    testimonial: "Merci pour le professionnalisme, conseils, disponibilité. Notaire compétente, agréable, ayant le sens relationnel.",
+    by: "Client satisfait"
   },
   {
     tempId: 5,
-    testimonial: "Service impeccable pour notre donation. Les conseils fiscaux nous ont permis d'optimiser la transmission.",
-    by: "Christiane B., L'Étang Salé",
-    imgSrc: "https://i.pravatar.cc/150?img=13"
+    testimonial: "Professionnelle, efficace, à l'écoute, souriante.",
+    by: "Client satisfait"
   },
   {
     tempId: 6,
-    testimonial: "Première acquisition immobilière et un accompagnement parfait du début à la fin. Très rassurant !",
-    by: "Lucas et Emma T., Saint-Louis",
-    imgSrc: "https://i.pravatar.cc/150?img=15"
+    testimonial: "Notaire à l'écoute, patiente, réactive, disponible qui explique très bien. Travail plus que parfait pour notre dossier qui a été finalisé très rapidement.",
+    by: "Gilda"
   },
   {
     tempId: 7,
-    testimonial: "Gestion parfaite de notre contrat de mariage. Conseils personnalisés et explications claires.",
-    by: "Alexandra K., Les Avirons",
-    imgSrc: "https://i.pravatar.cc/150?img=17"
+    testimonial: "Une véritable capacité de réactivité pour un dossier proposé en dernière minute. Bravo !",
+    by: "M. F."
+  },
+  {
+    tempId: 8,
+    testimonial: "Dossier traité très rapidement, réactif en cas de besoin. S'adapte à nos disponibilités. Je recommande fortement.",
+    by: "Marie Rose"
+  },
+  {
+    tempId: 9,
+    testimonial: "Nous avons apprécié l'accompagnement et le professionnalisme lors de notre achat. Maître Incana a su répondre à toutes nos interrogations. Nous saluons sa bienveillance, son écoute et sa rigueur. Nous recommandons sans hésiter ses services.",
+    by: "Laurence et Dimitri"
+  },
+  {
+    tempId: 10,
+    testimonial: "Le dossier de succession de ma maman a été géré avec professionnalisme, clarté et rapidité. Nous recommandons vivement Maître INCANA pour les démarches.",
+    by: "Reine-Claude"
+  },
+  {
+    tempId: 11,
+    testimonial: "Merci à Maître Yasmina INCANA d'avoir accompagné avec professionnalisme et délicatesse la signature de l'acte d'achat. Je suis sensible aussi à son attention particulière au lien familial et à la protection du bien.",
+    by: "M. B."
+  },
+  {
+    tempId: 12,
+    testimonial: "Notaire à l'écoute, et très réactive...",
+    by: "Mme G.F."
+  },
+  {
+    tempId: 13,
+    testimonial: "Très bien accueillie et explications claires. Transaction rapide.",
+    by: "Evelyne"
+  },
+  {
+    tempId: 14,
+    testimonial: "Maître Incana a été un soutien pour moi dans la manière efficace et rapide dont elle a fait état pour régler la succession de mon époux. Merci à vous Maître.",
+    by: "Simone"
   },
 ];
 
@@ -81,7 +108,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     <div
       onClick={() => handleMove(position)}
       className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-500 ease-in-out",
+        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-6 sm:p-8 transition-all duration-500 ease-in-out",
         isCenter
           ? "z-10 border-gold"
           : "z-0 hover:border-gold/50",
@@ -114,22 +141,24 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           height: 2
         }}
       />
-      <img
-        src={testimonial.imgSrc}
-        alt={`${testimonial.by.split(',')[0]}`}
-        className="mb-4 h-14 w-12 bg-muted object-cover object-top"
-        style={{
-          boxShadow: "3px 3px 0px hsl(var(--background))"
-        }}
-      />
+      {/* Icône guillemet au lieu de photo */}
+      <div className={cn(
+        "mb-4 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center",
+        isPrimary ? "bg-gold/20" : "bg-primary/10"
+      )}>
+        <Quote className={cn(
+          "w-5 h-5 sm:w-6 sm:h-6",
+          isPrimary ? "text-gold" : "text-primary"
+        )} />
+      </div>
       <h3 className={cn(
-        "text-base sm:text-xl font-medium font-serif",
+        "text-sm sm:text-base lg:text-lg font-medium font-serif leading-relaxed",
         isPrimary ? "text-white" : "text-text-primary"
       )}>
         "{testimonial.testimonial}"
       </h3>
       <p className={cn(
-        "absolute bottom-8 left-8 right-8 mt-2 text-sm italic",
+        "absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 mt-2 text-sm italic",
         isPrimary ? "text-gold" : "text-text-secondary"
       )}>
         - {testimonial.by}

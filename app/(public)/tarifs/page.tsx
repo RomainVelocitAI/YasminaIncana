@@ -2,12 +2,12 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Landmark, FileText, Briefcase, ArrowRight, ArrowDown } from 'lucide-react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 import { Button } from '@/components/ui/button'
-import { PieChart3D } from '@/components/tarifs/PieChart3D'
 
 const categories = [
   {
@@ -183,10 +183,33 @@ export default function TarifsPage() {
               </div>
             </AnimatedSection>
 
-            {/* Camembert 3D */}
+            {/* Illustration tarifs */}
             <motion.div style={{ y: chartY }}>
               <AnimatedSection delay={0.2}>
-                <PieChart3D />
+                <div className="relative">
+                  {/* Cadre décoratif */}
+                  <div className="absolute -top-4 -left-4 w-full h-full border-2 border-primary/20" />
+                  <div className="absolute -top-8 -left-8 w-full h-full border border-gold/30" />
+
+                  {/* Image principale */}
+                  <div className="relative overflow-hidden shadow-2xl">
+                    <Image
+                      src="/images/tarifs-illustration.png"
+                      alt="Illustration des frais de notaire"
+                      width={600}
+                      height={500}
+                      className="w-full h-auto object-cover"
+                      draggable={false}
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                    {/* Overlay léger */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Coins dorés décoratifs */}
+                  <div className="absolute -top-3 -left-3 w-12 h-12 border-t-2 border-l-2 border-gold" />
+                  <div className="absolute -bottom-3 -right-3 w-12 h-12 border-b-2 border-r-2 border-gold" />
+                </div>
               </AnimatedSection>
             </motion.div>
           </div>

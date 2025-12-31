@@ -43,3 +43,8 @@ next-env.d.ts
 # claude code
 .claude/
 PROMPT_CLAUDE_CODE.md
+
+# Dossiers sources médias (pas à déployer)
+PHOTOS ET VIDEOS/
+OBSERVATIONS/
+PREPARER MON RDV/

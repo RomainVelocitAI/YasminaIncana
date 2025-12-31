@@ -19,7 +19,7 @@ import { services } from '@/content/services'
 const serviceImages: Record<string, string> = {
   immobilier: '/images/service-immobilier.jpg',
   famille: '/images/service-famille.png',
-  entreprise: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop',
+  entreprise: '/images/service-entreprise.png',
 }
 
 export function ServicesCarousel() {

@@ -3,7 +3,8 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Home, Users, Building2, Scale, Phone } from 'lucide-react'
+import Image from 'next/image'
+import { Home, Users, Building2, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 // Configuration des 4 cartes de services
@@ -31,7 +32,8 @@ const serviceCards = [
   },
   {
     title: 'Conseil',
-    icon: Scale,
+    icon: null, // Utilise un SVG personnalisé
+    customIcon: '/images/icon-plume-acte.svg',
     href: '/services',
     size: 'lg' as const,
     position: 'right-outer',
@@ -42,12 +44,14 @@ const serviceCards = [
 function FloatingCard({
   title,
   icon: Icon,
+  customIcon,
   href,
   size,
   index,
 }: {
   title: string
-  icon: typeof Home
+  icon: typeof Home | null
+  customIcon?: string
   href: string
   size: 'sm' | 'md' | 'lg'
   index: number
@@ -113,7 +117,17 @@ function FloatingCard({
           >
             {/* Icône service - AGRANDIE */}
             <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+              {customIcon ? (
+                <Image
+                  src={customIcon}
+                  alt={title}
+                  width={40}
+                  height={40}
+                  className="w-8 h-8 md:w-10 md:h-10"
+                />
+              ) : Icon ? (
+                <Icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+              ) : null}
             </div>
 
             {/* Titre service - AGRANDI */}
@@ -173,7 +187,7 @@ export function HeroV2() {
               className={`w-full h-[70vh] md:h-[85vh] object-cover ${videoEnded ? 'invisible' : ''}`}
             >
               <source
-                src="https://res.cloudinary.com/dqd514udc/video/upload/v1767107638/Film_Yasmina_on3wpz.mov"
+                src="https://res.cloudinary.com/dqd514udc/video/upload/v1767154726/Videositeyasmina_iykjo5.mp4"
                 type="video/mp4"
               />
               {/* Fallback image */}
