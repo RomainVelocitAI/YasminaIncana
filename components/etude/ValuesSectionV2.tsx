@@ -11,8 +11,8 @@ import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 const pairs = [
   {
     photo: {
-      src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop',
-      alt: 'Maison moderne',
+      src: '/images/etude-expertise.png',
+      alt: 'Maître Incana - Expertise notariale',
     },
     text: {
       icon: Scale,
@@ -23,8 +23,8 @@ const pairs = [
   },
   {
     photo: {
-      src: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop',
-      alt: 'Famille heureuse',
+      src: '/images/maitre-incana.png',
+      alt: 'Maître Yasmina Incana',
     },
     text: {
       icon: Shield,
@@ -35,8 +35,8 @@ const pairs = [
   },
   {
     photo: {
-      src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop',
-      alt: 'Bureau notarial',
+      src: '/images/etude-proximite.png',
+      alt: 'Accompagnement personnalisé',
     },
     text: {
       icon: Users,
@@ -47,8 +47,8 @@ const pairs = [
   },
   {
     photo: {
-      src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
-      alt: 'Villa luxueuse',
+      src: '/images/etude-reactivite.png',
+      alt: 'Équipe réactive',
     },
     text: {
       icon: Clock,
@@ -68,6 +68,8 @@ function PhotoCard({ src, alt, index }: { src: string; alt: string; index: numbe
         alt={alt}
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-110"
+        draggable={false}
+        onContextMenu={(e) => e.preventDefault()}
       />
       {/* Liseré doré pulsant */}
       <motion.div
