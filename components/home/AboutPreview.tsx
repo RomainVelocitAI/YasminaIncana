@@ -80,9 +80,14 @@ export function AboutPreview() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+                  {/* Overlay de protection + gradient */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent z-10"
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
                 </div>
 
                 {/* Lignes décoratives dorées */}

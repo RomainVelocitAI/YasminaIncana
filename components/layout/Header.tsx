@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Menu, Phone } from 'lucide-react'
@@ -78,15 +79,28 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
       <nav className="container-wide">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className="group flex flex-col">
-            <span className={`font-serif text-xl md:text-2xl tracking-tight transition-colors ${
-              !isScrolled && hasDarkHero ? 'text-white' : 'text-[#8B2942]'
-            } group-hover:opacity-80`}>
-              Maître INCANA
-            </span>
-            <span className={`text-xs uppercase tracking-[0.2em] group-hover:text-primary transition-colors ${textMutedColor}`}>
-              Notaire
-            </span>
+          <Link href="/" className="group flex items-center gap-3">
+            <div className="relative w-12 h-12 md:w-14 md:h-14">
+              <Image
+                src="/images/logo.jpg"
+                alt="Logo Maître INCANA"
+                fill
+                className="object-contain object-left"
+                sizes="56px"
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className={`font-serif text-lg md:text-xl tracking-tight transition-colors ${
+                !isScrolled && hasDarkHero ? 'text-white' : 'text-[#8B2942]'
+              } group-hover:opacity-80`}>
+                Maître INCANA
+              </span>
+              <span className={`text-[10px] uppercase tracking-[0.15em] group-hover:text-primary transition-colors ${textMutedColor}`}>
+                Notaire
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

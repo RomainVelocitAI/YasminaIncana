@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 const footerLinks = {
   navigation: [
@@ -30,13 +31,26 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-block mb-4">
-              <h3 className="font-serif text-xl text-[#C27A8A]">
-                Maître INCANA
-              </h3>
-              <span className="text-xs text-gold uppercase tracking-[0.2em]">
-                Notaire
-              </span>
+            <Link href="/" className="inline-flex items-center gap-3 mb-4">
+              <div className="relative w-14 h-14">
+                <Image
+                  src="/images/logo.jpg"
+                  alt="Logo Maître INCANA"
+                  fill
+                  className="object-contain object-left"
+                  sizes="56px"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-[#C27A8A]">
+                  Maître INCANA
+                </h3>
+                <span className="text-xs text-gold uppercase tracking-[0.2em]">
+                  Notaire
+                </span>
+              </div>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed">
               Votre notaire à L'Étang Salé, La Réunion.
