@@ -7,7 +7,7 @@ export const services: Service[] = [
     icon: "Home",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
     shortDescription: "Ventes, acquisitions, prêts immobiliers et garanties hypothécaires",
-    fullDescription: "Le notaire est l'acteur incontournable de toute transaction immobilière. De l'acquisition à la vente, en passant par les prêts et les garanties, nous vous accompagnons à chaque étape pour sécuriser votre projet immobilier.",
+    fullDescription: "L'Office notarial vous accompagne dans vos opérations de vente et d'acquisitions immobilières de maisons, appartements, terrains à bâtir, terrains agricoles, etc.",
     prestations: [
       "Ventes et acquisitions immobilières",
       "Prêt immobilier",
@@ -20,7 +20,7 @@ export const services: Service[] = [
     icon: "Users",
     image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&h=600&fit=crop",
     shortDescription: "Successions, donations, testaments et protection du patrimoine familial",
-    fullDescription: "La transmission du patrimoine et la protection de vos proches sont au cœur de nos préoccupations. Nous vous conseillons pour organiser votre succession, rédiger vos testaments et accompagner vos donations dans le respect de vos volontés.",
+    fullDescription: "Votre Notaire est le conservateur des temps forts de votre vie (mariage, pacs, adoption, filiation, testament, divorce, donation, succession, ...).",
     prestations: [
       "Successions",
       "Donations entre vifs",
@@ -38,7 +38,7 @@ export const services: Service[] = [
     icon: "Building2",
     image: "/images/service-entreprise.png",
     shortDescription: "Création de société, cessions et conseil patrimonial personnalisé",
-    fullDescription: "Entrepreneurs et chefs d'entreprise, nous vous accompagnons dans la création, la transmission et la gestion de votre entreprise. Notre expertise en conseil patrimonial vous aide à optimiser et protéger votre patrimoine professionnel et personnel.",
+    fullDescription: "Entrepreneurs et dirigeants, nous vous accompagnons dans la création, la transmission et la gestion de vos sociétés (SCI, SARL, SAS, SCCV, ...).",
     prestations: [
       "Création et constitution de sociétés",
       "Cessions de parts sociales et actions",

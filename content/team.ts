@@ -16,6 +16,14 @@ export const team: TeamMember[] = [
     bio: "Forte de 10 années d'expérience acquises dans des études parisiennes prestigieuses, Chloé Dupéré apporte son expertise pointue en matière de copropriété. Sa maîtrise des dossiers complexes et son sens du détail garantissent un accompagnement de qualité pour chaque transaction.",
     email: null,
     specialties: ["Copropriété", "Transactions immobilières", "Droit de la construction"]
+  },
+  {
+    name: "Melvyne CHEUNG YOU SUN",
+    role: "Assistante juridique",
+    image: "/images/team-melvyne.png",
+    bio: "Diplômée en droit notarial, Melvyne CHEUNG YOU SUN apporte un suivi administratif des projets. En lien avec les Administrations, elle s'assure de l'avancée des démarches.",
+    email: null,
+    specialties: ["Suivi administratif", "Relations administrations", "Gestion des démarches"]
   }
 ]
 
