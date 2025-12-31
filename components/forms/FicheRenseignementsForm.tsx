@@ -595,111 +595,15 @@ export function FicheRenseignementsForm({ isOpen, onClose }: FicheRenseignements
   )
 }
 
-// Fonction pour générer un PDF vierge de la fiche de renseignements
+// Fonction pour télécharger le PDF vierge de la fiche de renseignements
 export function generateBlankFichePDF() {
-  const doc = new jsPDF()
-  const pageWidth = doc.internal.pageSize.getWidth()
-
-  // Couleurs
-  const primaryColor: [number, number, number] = [13, 92, 99]
-  const goldColor: [number, number, number] = [194, 156, 96]
-  const textColor: [number, number, number] = [51, 51, 51]
-
-  // En-tête
-  doc.setFillColor(...primaryColor)
-  doc.rect(0, 0, pageWidth, 35, 'F')
-
-  doc.setFillColor(...goldColor)
-  doc.rect(0, 35, pageWidth, 3, 'F')
-
-  doc.setTextColor(255, 255, 255)
-  doc.setFontSize(22)
-  doc.setFont('helvetica', 'bold')
-  doc.text('FICHE DE RENSEIGNEMENTS', pageWidth / 2, 20, { align: 'center' })
-
-  doc.setFontSize(10)
-  doc.setFont('helvetica', 'normal')
-  doc.text('Maître Yasmina INCANA - Notaire', pageWidth / 2, 28, { align: 'center' })
-
-  // Contenu
-  let y = 50
-  doc.setTextColor(...textColor)
-
-  const addSection = (title: string) => {
-    doc.setFillColor(...primaryColor)
-    doc.rect(15, y - 5, pageWidth - 30, 8, 'F')
-    doc.setTextColor(255, 255, 255)
-    doc.setFontSize(11)
-    doc.setFont('helvetica', 'bold')
-    doc.text(title, 20, y)
-    doc.setTextColor(...textColor)
-    y += 12
-  }
-
-  const addField = (label: string, width: number = 80) => {
-    doc.setFontSize(10)
-    doc.setFont('helvetica', 'normal')
-    doc.text(label + ' :', 20, y)
-    doc.line(70, y, 70 + width, y)
-    y += 10
-  }
-
-  // Identité
-  addSection('IDENTITÉ')
-  addField('Civilité (M. / Mme)', 40)
-  addField('Nom', 100)
-  addField('Prénoms', 100)
-  addField('Profession', 100)
-  addField('Date de naissance', 60)
-  addField('Lieu de naissance', 100)
-  addField('Nationalité', 80)
-
-  y += 5
-  addSection('COORDONNÉES')
-  addField('Adresse', 110)
-  addField('Code postal', 40)
-  addField('Ville', 80)
-  addField('Téléphone', 60)
-  addField('Email', 100)
-
-  y += 5
-  addSection('SITUATION MATRIMONIALE')
-  doc.setFontSize(9)
-  doc.text('Cochez :  [ ] Célibataire   [ ] Marié(e)   [ ] Pacsé(e)   [ ] Divorcé(e)   [ ] Veuf(ve)', 20, y)
-  y += 12
-
-  addSection('CONJOINT / EX-CONJOINT / PARTENAIRE (si applicable)')
-  addField('Civilité', 40)
-  addField('Nom', 100)
-  addField('Prénoms', 100)
-  addField('Profession', 100)
-  addField('Date de naissance', 60)
-  addField('Lieu de naissance', 100)
-
-  y += 5
-  addSection('MARIAGE / PACS (si applicable)')
-  addField('Date', 60)
-  addField('Lieu', 100)
-  doc.setFontSize(9)
-  doc.text('Régime :  [ ] Sans contrat (légal)   [ ] Avec contrat de mariage', 20, y)
-  y += 8
-  addField('Notaire du contrat', 100)
-  addField('Date du contrat', 60)
-
-  // Pied de page
-  const footerY = doc.internal.pageSize.getHeight() - 25
-  doc.setFillColor(...primaryColor)
-  doc.rect(0, footerY, pageWidth, 25, 'F')
-
-  doc.setFillColor(...goldColor)
-  doc.rect(0, footerY, pageWidth, 2, 'F')
-
-  doc.setTextColor(255, 255, 255)
-  doc.setFontSize(9)
-  doc.text('96 Avenue Raymond Barre - 97427 L\'Étang Salé', pageWidth / 2, footerY + 8, { align: 'center' })
-  doc.text('Tél : 0262 960 300 - Email : office.incana@notaires.fr', pageWidth / 2, footerY + 14, { align: 'center' })
-
-  doc.save('fiche-renseignements-vierge.pdf')
+  // Télécharger le PDF pré-conçu avec le logo en filigrane
+  const link = document.createElement('a')
+  link.href = '/documents/fiche-renseignements-vierge.pdf'
+  link.download = 'fiche-renseignements-vierge.pdf'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
 }
 
 // Alias pour compatibilité
