@@ -236,11 +236,19 @@ export default function FraisNotaireVisualization() {
   }, [])
 
   return (
-    <div className="bg-surface rounded-lg p-6 md:p-8 shadow-lg border border-border-light">
+    <div className="rounded-lg p-6 md:p-8">
+      {/* Header - AVANT le graphique */}
+      <h3 className="font-serif text-2xl md:text-3xl text-text-primary mb-2 text-center">
+        Répartition des Frais d'Acte
+      </h3>
+      <p className="text-sm text-text-muted italic text-center mb-6">
+        Improprement appelés « frais de notaire »
+      </p>
+
       {/* 3D Container */}
       <div
         ref={containerRef}
-        className="w-full rounded-lg overflow-hidden"
+        className="w-full rounded-lg overflow-hidden relative"
         style={{ height: '400px' }}
       />
 
