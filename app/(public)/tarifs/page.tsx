@@ -210,7 +210,7 @@ export default function TarifsPage() {
                 Détail de la répartition
               </h2>
               <p className="text-text-secondary max-w-2xl mx-auto">
-                Comprendre où va chaque euro de vos frais de notaire.
+                Comprendre où va chaque euro de vos frais d'acte.
               </p>
             </div>
           </AnimatedSection>
