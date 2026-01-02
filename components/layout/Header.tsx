@@ -21,7 +21,7 @@ const baseNavigation = [
 const propertiesNavItem = { name: 'Biens à vendre', href: '/biens' }
 
 // Pages avec un héro sombre qui nécessitent un header avec fond
-const darkHeroPages = ['/services', '/etude', '/biens', '/tarifs']
+const darkHeroPages = ['/services', '/etude', '/biens', '/tarifs', '/contact', '/famille', '/entreprise', '/immobilier']
 
 interface HeaderProps {
   showPropertiesLink?: boolean
@@ -57,9 +57,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
   // Déterminer les styles du header
   const headerStyles = isScrolled
     ? 'bg-surface/95 backdrop-blur-md shadow-sm border-b border-border-light'
-    : hasDarkHero
-      ? 'bg-text-primary/80 backdrop-blur-md'
-      : 'bg-transparent'
+    : 'bg-transparent'
 
   // Couleurs du texte selon le contexte
   const isDarkMode = !isScrolled && hasDarkHero
@@ -109,20 +107,19 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative text-sm tracking-wide transition-colors duration-300 ${
+                className={`group relative text-sm tracking-wide transition-colors duration-300 ${
                   pathname === item.href
                     ? activeColor
-                    : `${textSecondaryColor} hover:${isDarkMode ? 'text-white' : 'text-primary'}`
+                    : `${textSecondaryColor} ${isDarkMode ? 'hover:text-white' : 'hover:text-primary'}`
                 }`}
               >
                 {item.name}
-                {pathname === item.href && (
-                  <motion.span
-                    layoutId="activeNav"
-                    className={`absolute -bottom-1 left-0 right-0 h-px ${underlineColor}`}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
+                {/* Underline - visible si actif, au survol sinon */}
+                <span
+                  className={`absolute -bottom-1 left-0 right-0 h-px ${underlineColor} transition-transform duration-300 origin-left ${
+                    pathname === item.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                />
               </Link>
             ))}
           </div>

@@ -38,14 +38,38 @@ export function ContactForm({ initialSubject }: ContactFormProps) {
     setIsSubmitting(true)
     setError('')
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      nom: formData.get('lastName'),
+      prenom: formData.get('firstName'),
+      email: formData.get('email'),
+      telephone: formData.get('phone') ? String(formData.get('phone')).replace(/\s/g, '') : null,
+      objet: selectedSubject,
+      message: formData.get('message'),
+      date: new Date().toISOString(),
+    }
 
-    setIsSubmitting(false)
-    setIsSuccess(true)
+    try {
+      const response = await fetch('https://n8n.srv765302.hstgr.cloud/webhook/00ffd6a6-1082-45cd-abb2-c222c322d658', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
-    // Reset after 5 seconds
-    setTimeout(() => setIsSuccess(false), 5000)
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'envoi du message')
+      }
+
+      setIsSuccess(true)
+      // Reset after 5 seconds
+      setTimeout(() => setIsSuccess(false), 5000)
+    } catch (err) {
+      setError('Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSuccess) {
