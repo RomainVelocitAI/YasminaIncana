@@ -187,7 +187,7 @@ export function HeroV2() {
               className={`w-full h-[70vh] md:h-[85vh] object-cover ${videoEnded ? 'invisible' : ''}`}
             >
               <source
-                src="https://res.cloudinary.com/dqd514udc/video/upload/v1767154726/Videositeyasmina_iykjo5.mp4"
+                src="https://res.cloudinary.com/dqd514udc/video/upload/v1767644513/1231_1_zmttv7.mp4"
                 type="video/mp4"
               />
               {/* Fallback image */}

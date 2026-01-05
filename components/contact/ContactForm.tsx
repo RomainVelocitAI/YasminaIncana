@@ -50,7 +50,7 @@ export function ContactForm({ initialSubject }: ContactFormProps) {
     }
 
     try {
-      const response = await fetch('https://n8n.srv765302.hstgr.cloud/webhook/00ffd6a6-1082-45cd-abb2-c222c322d658', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,8 +58,10 @@ export function ContactForm({ initialSubject }: ContactFormProps) {
         body: JSON.stringify(data),
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        throw new Error('Erreur lors de l\'envoi du message')
+        throw new Error(result.error || 'Erreur lors de l\'envoi du message')
       }
 
       setIsSuccess(true)

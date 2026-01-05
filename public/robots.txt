@@ -1,0 +1,16 @@
+# Robots.txt pour Etude Notariale Maitre INCANA
+# https://notaire-incana.re
+
+User-agent: *
+Allow: /
+
+# Bloquer les pages admin
+Disallow: /admin
+Disallow: /admin/
+
+# Bloquer les ressources internes
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://notaire-incana.re/sitemap.xml

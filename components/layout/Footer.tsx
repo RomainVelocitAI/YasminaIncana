@@ -11,9 +11,9 @@ const footerLinks = {
     { name: 'Contact', href: '/contact' },
   ],
   services: [
-    { name: 'Immobilier', href: '/services/immobilier' },
-    { name: 'Famille & Succession', href: '/services/famille' },
-    { name: 'Entreprise & Patrimoine', href: '/services/entreprise' },
+    { name: 'Immobilier', href: '/immobilier' },
+    { name: 'Famille & Succession', href: '/famille' },
+    { name: 'Entreprise & Patrimoine', href: '/entreprise' },
   ],
   legal: [
     { name: 'Mentions légales', href: '/mentions-legales' },

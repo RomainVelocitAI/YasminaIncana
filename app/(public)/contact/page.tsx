@@ -327,6 +327,7 @@ export default function ContactPage() {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         title="Localisation de l'étude - 96 Avenue Raymond Barre, L'Étang Salé"
+                        sandbox="allow-scripts allow-same-origin allow-popups"
                       />
                     </div>
                   </div>

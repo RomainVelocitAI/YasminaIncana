@@ -129,9 +129,10 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
             {/* Phone - Desktop */}
             <a
               href="tel:0262960300"
+              aria-label="Appeler l'étude au 0262 960 300"
               className={`hidden md:flex items-center gap-2 text-sm hover:text-primary transition-colors ${textSecondaryColor}`}
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4" aria-hidden="true" />
               <span>0262 960 300</span>
             </a>
 
@@ -191,9 +192,10 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
                   <div className="p-6 border-t border-border bg-secondary/30">
                     <a
                       href="tel:0262960300"
+                      aria-label="Appeler l'étude au 0262 960 300"
                       className="flex items-center gap-3 text-text-secondary hover:text-primary transition-colors mb-4"
                     >
-                      <Phone className="w-5 h-5" />
+                      <Phone className="w-5 h-5" aria-hidden="true" />
                       <span>0262 960 300</span>
                     </a>
                     <Button
