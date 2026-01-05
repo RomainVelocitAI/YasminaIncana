@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Cormorant_Garamond, DM_Sans, Caveat } from 'next/font/google'
 import './globals.css'
 import { MediaProtection } from '@/components/MediaProtection'
+import { CookieBanner } from '@/components/cookies/CookieBanner'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-background antialiased">
         <MediaProtection />
         {children}
+        <CookieBanner />
       </body>
     </html>
   )
