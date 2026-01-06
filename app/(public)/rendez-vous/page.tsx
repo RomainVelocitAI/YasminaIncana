@@ -68,7 +68,7 @@ const documentCategories = [
       {
         title: 'Prescription trentenaire',
         checklistId: 'prescription-trentenaire',
-        provision: '470 €',
+        provision: null,
         items: [
           'Plan cadastral du terrain',
           'Extrait de matrice cadastrale',
@@ -95,7 +95,7 @@ const documentCategories = [
       {
         title: 'Succession',
         checklistId: 'succession',
-        provision: '470 €',
+        provision: null,
         items: [
           'Concernant le défunt :',
           '• Acte de décès',
@@ -120,7 +120,7 @@ const documentCategories = [
       {
         title: 'Donation / Donation-partage',
         checklistId: 'donation',
-        provision: '470 €',
+        provision: null,
         items: [
           'Pour le donateur ET le donataire :',
           '• Extrait acte de naissance',
@@ -142,7 +142,7 @@ const documentCategories = [
       {
         title: 'Contrat de mariage',
         checklistId: 'contrat-mariage',
-        provision: '350 €',
+        provision: null,
         items: [
           'Pour chaque futur époux :',
           '• Fiche de renseignements complétée',
@@ -162,7 +162,7 @@ const documentCategories = [
       {
         title: 'PACS',
         checklistId: 'pacs',
-        provision: '350 €',
+        provision: null,
         items: [
           'Pour chaque futur partenaire :',
           '• Fiche de renseignements complétée',
@@ -186,7 +186,7 @@ const documentCategories = [
       {
         title: 'Constitution SCI',
         checklistId: 'sci',
-        provision: '470 €',
+        provision: null,
         items: [
           'Pour chaque associé :',
           '• Nom, prénom, date et lieu de naissance',
@@ -548,8 +548,7 @@ export default function RendezVousPage() {
                 Nous contacter
               </h2>
               <p className="text-text-secondary mb-8">
-                Une fois vos documents préparés, n'hésitez pas à nous contacter pour
-                fixer un rendez-vous. Notre équipe se tient à votre disposition.
+                N'hésitez pas à nous contacter pour fixer un rendez-vous. Notre équipe se tient à votre disposition.
               </p>
 
               <div className="space-y-6">

@@ -167,7 +167,7 @@ export const TeamSlider = ({
                 <div className="inline-flex items-center gap-2 mb-3">
                   <span className="h-px w-8 bg-gold" />
                   <span className="text-gold text-sm uppercase tracking-wider font-medium">
-                    Notaire
+                    {activeMember.role}
                   </span>
                 </div>
 

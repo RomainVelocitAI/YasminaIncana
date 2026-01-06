@@ -24,8 +24,8 @@ const pairs = [
   },
   {
     photo: {
-      // Poignée de main professionnelle - symbolise la confiance
-      src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
+      // Poignée de main diverse - symbolise la confiance
+      src: '/images/valeur-confiance.jpg',
       alt: 'Poignée de main - Confiance',
     },
     text: {
@@ -37,9 +37,9 @@ const pairs = [
   },
   {
     photo: {
-      // Image locale pour la proximité
-      src: '/images/valeur-proximite.png',
-      alt: 'Proximité - Accompagnement personnalisé',
+      // Couple de personnes âgées savourant un café - ambiance chaleureuse et proximité
+      src: 'https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=600&h=400&fit=crop',
+      alt: 'Couple savourant un café - Proximité',
     },
     text: {
       icon: Users,
@@ -50,9 +50,9 @@ const pairs = [
   },
   {
     photo: {
-      // Image locale pour la réactivité
+      // Femme professionnelle - symbolise la réactivité
       src: '/images/valeur-reactivite.png',
-      alt: 'Réactivité - Équipe disponible',
+      alt: 'Professionnelle - Réactivité',
     },
     text: {
       icon: Clock,
