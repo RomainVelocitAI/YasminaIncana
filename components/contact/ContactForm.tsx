@@ -196,10 +196,76 @@ export function ContactForm({ initialSubject }: ContactFormProps) {
         )}
       </Button>
 
-      <p className="text-xs text-text-muted">
-        * Champs obligatoires. Vos données sont traitées conformément à notre
-        politique de confidentialité.
+      <p className="text-xs text-text-muted mb-6">
+        * Champs obligatoires
       </p>
+
+      {/* Mention légale RGPD complète */}
+      <div className="border-t border-border pt-6">
+        <details className="group">
+          <summary className="text-sm text-text-muted cursor-pointer hover:text-text-secondary transition-colors flex items-center gap-2">
+            <span className="text-xs">▶</span>
+            <span className="group-open:hidden">Mention sur la protection des données personnelles</span>
+            <span className="hidden group-open:inline">Masquer la mention sur la protection des données personnelles</span>
+          </summary>
+          <div className="mt-4 text-xs text-text-muted space-y-4 leading-relaxed">
+            <p>
+              L'Office notarial traite des données personnelles concernant les personnes mentionnées aux présentes,
+              pour l'accomplissement des activités notariales, notamment de formalités d'actes.
+            </p>
+            <p>
+              Ce traitement est fondé sur le respect d'une obligation légale et l'exécution d'une mission relevant
+              de l'exercice de l'autorité publique déléguée par l'État dont sont investis les notaires, officiers publics,
+              conformément à l'ordonnance n° 45-2590 du 2 novembre 1945.
+            </p>
+            <p>Ces données seront susceptibles d'être transférées aux destinataires suivants :</p>
+            <ul className="list-disc list-inside space-y-2 pl-2">
+              <li>les administrations ou partenaires légalement habilités tels que la Direction Générale des Finances Publiques,
+              ou, le cas échéant, le livre foncier, les instances notariales, les organismes du notariat, les fichiers centraux
+              de la profession notariale (Fichier Central Des Dernières Volontés, Minutier Central Électronique des Notaires,
+              registre du PACS, etc.),</li>
+              <li>les offices notariaux participant ou concourant à l'acte,</li>
+              <li>les établissements financiers concernés,</li>
+              <li>les organismes de conseils spécialisés pour la gestion des activités notariales,</li>
+              <li>le Conseil supérieur du notariat ou son délégataire, pour la production des statistiques permettant
+              l'évaluation des biens immobiliers, en application du décret n° 2013-803 du 3 septembre 2013,</li>
+              <li>les organismes publics ou privés pour des opérations de vérification dans le cadre de la recherche
+              de personnalités politiquement exposées ou ayant fait l'objet de gel des avoirs ou sanctions, de la lutte
+              contre le blanchiment des capitaux et le financement du terrorisme. Ces vérifications font l'objet d'un
+              transfert de données dans un pays situé hors de l'Union Européenne et encadré par la signature de clauses
+              contractuelles types de la Commission européenne, visant à assurer un niveau de protection des données
+              substantiellement équivalent à celui garanti dans l'Union Européenne.</li>
+            </ul>
+            <p>
+              La communication de ces données à ces destinataires peut être indispensable pour l'accomplissement des
+              activités notariales.
+            </p>
+            <p>
+              Les documents permettant d'établir, d'enregistrer et de publier les actes sont conservés 30 ans à compter
+              de la réalisation de l'ensemble des formalités. L'acte authentique et ses annexes sont conservés 75 ans et
+              100 ans lorsque l'acte porte sur des personnes mineures ou majeures protégées. Les vérifications liées aux
+              personnalités politiquement exposées, au blanchiment des capitaux et au financement du terrorisme sont
+              conservées 5 ans après la fin de la relation d'affaires.
+            </p>
+            <p>
+              Conformément à la réglementation en vigueur relative à la protection des données personnelles, les personnes
+              peuvent demander l'accès aux données les concernant. Le cas échéant, elles peuvent demander la rectification
+              ou l'effacement de celles-ci, obtenir la limitation du traitement de ces données ou s'y opposer pour des
+              raisons tenant à leur situation particulière. Elles peuvent également définir des directives relatives à la
+              conservation, à l'effacement et à la communication de leurs données personnelles après leur décès.
+            </p>
+            <p>
+              L'Office notarial a désigné un Délégué à la protection des données que les personnes peuvent contacter
+              à l'adresse suivante : <a href="mailto:dpo.not@adnov.fr" className="underline hover:text-primary transition-colors">dpo.not@adnov.fr</a>.
+            </p>
+            <p>
+              Si les personnes estiment, après avoir contacté l'Office notarial, que leurs droits ne sont pas respectés,
+              elles peuvent introduire une réclamation auprès d'une autorité européenne de contrôle, la Commission
+              Nationale de l'Informatique et des Libertés pour la France.
+            </p>
+          </div>
+        </details>
+      </div>
     </form>
   )
 }
