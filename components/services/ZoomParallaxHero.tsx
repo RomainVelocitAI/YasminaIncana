@@ -1,7 +1,7 @@
 'use client'
 
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { ArrowDown } from 'lucide-react'
 
 // Images pour le zoom parallax - photos en lien avec les services notariaux
@@ -15,7 +15,18 @@ const images = [
   { src: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&h=600&fit=crop', alt: 'La Réunion - Paysage' },
 ]
 
+// Mobile-only images (reduced set)
+const mobileImages = images.slice(0, 3)
+
 export function ZoomParallaxHero() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
   const container = useRef(null)
   const { scrollYProgress } = useScroll({
     target: container,
@@ -34,6 +45,102 @@ export function ZoomParallaxHero() {
   const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
   const textY = useTransform(scrollYProgress, [0, 0.3], [0, -100])
 
+  // Mobile version: Simplified hero without complex parallax
+  if (isMobile) {
+    return (
+      <div className="relative min-h-screen bg-text-primary overflow-hidden">
+        {/* Background with overlay */}
+        <div className="absolute inset-0">
+          <img
+            src={images[0].src}
+            alt={images[0].alt}
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-text-primary/70 via-text-primary/60 to-text-primary/80" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex items-center justify-center gap-3 mb-6"
+          >
+            <span className="h-px w-10 bg-gold" />
+            <span className="text-gold text-xs uppercase tracking-[0.2em] font-medium">
+              Notre expertise
+            </span>
+            <span className="h-px w-10 bg-gold" />
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="font-serif text-3xl text-white mb-6 leading-tight"
+          >
+            Votre notaire
+            <br />
+            <span className="text-gold">à votre écoute</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-base text-white/80 mb-10 max-w-sm leading-relaxed"
+          >
+            Un accompagnement complet et personnalisé pour sécuriser
+            vos projets immobiliers, protéger votre famille et développer votre patrimoine.
+          </motion.p>
+
+          {/* Mobile images grid - simplified */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="grid grid-cols-3 gap-2 w-full max-w-xs mb-10"
+          >
+            {mobileImages.map(({ src, alt }, index) => (
+              <div key={index} className="relative aspect-square overflow-hidden rounded-lg shadow-lg">
+                <img
+                  src={src}
+                  alt={alt}
+                  className="w-full h-full object-cover"
+                />
+                <motion.div
+                  animate={{ opacity: [0.3, 0.7, 0.3] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: index * 0.2 }}
+                  className="absolute inset-0 border-2 border-gold/50 rounded-lg pointer-events-none"
+                />
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="flex flex-col items-center gap-2"
+          >
+            <span className="text-xs text-white/60 uppercase tracking-widest">
+              Découvrir
+            </span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ArrowDown className="w-5 h-5 text-gold" />
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    )
+  }
+
+  // Desktop version: Full parallax experience
   return (
     <div ref={container} className="relative h-[300vh]">
       <div className="sticky top-0 h-screen overflow-hidden bg-text-primary">

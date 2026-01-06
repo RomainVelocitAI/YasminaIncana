@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Scale, Shield, Users, Clock } from 'lucide-react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
@@ -166,12 +166,51 @@ function StickyPair({
   )
 }
 
+// Composant mobile simple pour une valeur
+function MobileValueCard({ pair, index }: { pair: typeof pairs[0]; index: number }) {
+  const Icon = pair.text.icon
+  return (
+    <AnimatedSection delay={index * 0.1}>
+      <div className="bg-surface rounded-2xl p-5 shadow-lg border border-border-light relative overflow-hidden">
+        {/* Icône et titre en ligne */}
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Icon className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="font-serif text-lg text-text-primary">
+            {pair.text.title}
+          </h3>
+        </div>
+        {/* Description */}
+        <p className="text-text-secondary text-sm leading-relaxed">
+          {pair.text.description}
+        </p>
+        {/* Liseré doré en bas */}
+        <motion.div
+          animate={{ opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: index * 0.15 }}
+          className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gold via-gold to-transparent"
+        />
+      </div>
+    </AnimatedSection>
+  )
+}
+
 export function ValuesSectionV2() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   })
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
     <section className="relative bg-background">
@@ -196,25 +235,38 @@ export function ValuesSectionV2() {
         </div>
       </div>
 
-      {/* Paires sticky */}
-      <main
-        ref={containerRef}
-        className="relative flex w-full flex-col items-center justify-center pb-[50vh] pt-[5vh] sm:pb-[60vh] sm:pt-[8vh] lg:pb-[70vh] lg:pt-[10vh]"
-      >
-        {pairs.map((pair, i) => {
-          const targetScale = Math.max(0.6, 1 - (pairs.length - i - 1) * 0.08)
-          return (
-            <StickyPair
-              key={`pair_${i}`}
-              pair={pair}
-              pairIndex={i}
-              progress={scrollYProgress}
-              range={[i * 0.2, 1]}
-              targetScale={targetScale}
-            />
-          )
-        })}
-      </main>
+      {/* VERSION MOBILE: Cartes simples empilées */}
+      {isMobile && (
+        <div className="container-wide pb-16">
+          <div className="grid grid-cols-1 gap-4">
+            {pairs.map((pair, i) => (
+              <MobileValueCard key={`mobile_${i}`} pair={pair} index={i} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* VERSION DESKTOP: Paires sticky avec effet de superposition */}
+      {!isMobile && (
+        <main
+          ref={containerRef}
+          className="relative flex w-full flex-col items-center justify-center pb-[50vh] pt-[5vh] sm:pb-[60vh] sm:pt-[8vh] lg:pb-[70vh] lg:pt-[10vh]"
+        >
+          {pairs.map((pair, i) => {
+            const targetScale = Math.max(0.6, 1 - (pairs.length - i - 1) * 0.08)
+            return (
+              <StickyPair
+                key={`pair_${i}`}
+                pair={pair}
+                pairIndex={i}
+                progress={scrollYProgress}
+                range={[i * 0.2, 1]}
+                targetScale={targetScale}
+              />
+            )
+          })}
+        </main>
+      )}
 
       {/* Ligne dorée pulsante en bas */}
       <PulsingGoldLine position="bottom" fromDirection="center" />

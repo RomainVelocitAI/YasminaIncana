@@ -206,10 +206,11 @@ export function HeroV2() {
       {/* 5 éléments au même niveau avec espacement uniforme */}
       <div className="relative z-20 -mt-8 md:-mt-16 pb-16 md:pb-24">
         <div className="w-full px-4 md:px-8 lg:px-12">
-          <div className="flex flex-col md:flex-row items-center justify-evenly">
+          {/* VERSION DESKTOP: Cartes flottantes autour du H1 */}
+          <div className="hidden md:flex flex-row items-center justify-evenly">
 
             {/* Carte 1 - Immobilier (gauche ext) - décalée vers l'extérieur */}
-            <div className="order-2 md:order-1 md:-ml-8 lg:-ml-16">
+            <div className="md:-ml-8 lg:-ml-16">
               <FloatingCard
                 {...serviceCards[0]}
                 index={0}
@@ -217,7 +218,7 @@ export function HeroV2() {
             </div>
 
             {/* Carte 2 - Famille (gauche int) */}
-            <div className="order-3 md:order-2">
+            <div>
               <FloatingCard
                 {...serviceCards[1]}
                 index={1}
@@ -229,7 +230,7 @@ export function HeroV2() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-center py-6 order-1 md:order-3"
+              className="text-center py-6"
             >
               {/* Eyebrow */}
               <motion.div
@@ -246,12 +247,12 @@ export function HeroV2() {
               </motion.div>
 
               {/* H1 Principal */}
-              <h1 className="font-serif text-3xl md:text-4xl lg:text-6xl text-primary mb-3 leading-tight">
+              <h1 className="font-serif text-4xl lg:text-6xl text-primary mb-3 leading-tight">
                 M<span className="text-[0.9em]">e</span> Yasmina INCANA
               </h1>
 
               {/* Sous-titre */}
-              <p className="text-text-muted text-base md:text-lg lg:text-xl mb-8">
+              <p className="text-text-muted text-lg lg:text-xl mb-8">
                 Notaire à L'Étang Salé
               </p>
 
@@ -259,7 +260,7 @@ export function HeroV2() {
               <Button
                 asChild
                 size="lg"
-                className="bg-primary hover:bg-primary-dark text-white px-8 md:px-10 py-6 md:py-7 text-base md:text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20"
+                className="bg-primary hover:bg-primary-dark text-white px-10 py-7 text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20"
               >
                 <Link href="/contact">
                   <Phone className="w-4 h-4 mr-2" />
@@ -269,7 +270,7 @@ export function HeroV2() {
             </motion.div>
 
             {/* Carte 3 - Entreprise (droite int) */}
-            <div className="order-4">
+            <div>
               <FloatingCard
                 {...serviceCards[2]}
                 index={2}
@@ -277,13 +278,103 @@ export function HeroV2() {
             </div>
 
             {/* Carte 4 - Conseil (droite ext) - décalée vers l'extérieur */}
-            <div className="order-5 md:-mr-8 lg:-mr-16">
+            <div className="md:-mr-8 lg:-mr-16">
               <FloatingCard
                 {...serviceCards[3]}
                 index={3}
               />
             </div>
 
+          </div>
+
+          {/* VERSION MOBILE: H1 + CTA + Grille de cartes en dessous */}
+          <div className="md:hidden flex flex-col items-center">
+            {/* Bloc central : H1 + CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-center py-6"
+            >
+              {/* Eyebrow */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex items-center justify-center gap-3 mb-4"
+              >
+                <span className="h-px w-8 bg-gold" />
+                <span className="text-gold text-xs uppercase tracking-[0.2em] font-medium">
+                  Notaire
+                </span>
+                <span className="h-px w-8 bg-gold" />
+              </motion.div>
+
+              {/* H1 Principal */}
+              <h1 className="font-serif text-3xl text-primary mb-3 leading-tight">
+                M<span className="text-[0.9em]">e</span> Yasmina INCANA
+              </h1>
+
+              {/* Sous-titre */}
+              <p className="text-text-muted text-base mb-8">
+                Notaire à L'Étang Salé
+              </p>
+
+              {/* CTA */}
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary hover:bg-primary-dark text-white px-8 py-6 text-base transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20"
+              >
+                <Link href="/contact">
+                  <Phone className="w-4 h-4 mr-2" />
+                  Contacter l'étude
+                </Link>
+              </Button>
+            </motion.div>
+
+            {/* Grille 2x2 de cartes compactes sur mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="grid grid-cols-2 gap-3 mt-6 w-full max-w-sm"
+            >
+              {serviceCards.map((card, index) => {
+                const Icon = card.icon
+                return (
+                  <Link key={card.title} href={card.href}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
+                      className="bg-white/95 backdrop-blur-sm border border-border-light shadow-md p-4 flex flex-col items-center justify-center aspect-square relative overflow-hidden"
+                    >
+                      {/* Icône */}
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                        {card.customIcon ? (
+                          <Image
+                            src={card.customIcon}
+                            alt={card.title}
+                            width={28}
+                            height={28}
+                            className="w-7 h-7"
+                          />
+                        ) : Icon ? (
+                          <Icon className="w-6 h-6 text-primary" />
+                        ) : null}
+                      </div>
+                      {/* Titre */}
+                      <span className="font-serif text-sm text-center text-text-primary">
+                        {card.title}
+                      </span>
+                      {/* Accent doré en bas */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gold/50 via-gold to-gold/50" />
+                    </motion.div>
+                  </Link>
+                )
+              })}
+            </motion.div>
           </div>
         </div>
       </div>

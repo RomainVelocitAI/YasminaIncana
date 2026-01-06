@@ -3,6 +3,9 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { Phone, ArrowDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // --- Utility ---
 // function cn(...inputs: ClassValue[]) {
@@ -91,6 +94,125 @@ function FlipCard({
     );
 }
 
+// --- Mobile Hero Component (Static, simplified) ---
+function MobileHero() {
+    return (
+        <div className="relative w-full h-full bg-[#FAFAFA] overflow-hidden">
+            {/* Background image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/images/etude-hero.png"
+                    alt="L'étude notariale"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                {/* Overlay sombre */}
+                <div className="absolute inset-0 bg-gradient-to-b from-text-primary/60 via-text-primary/50 to-text-primary/70" />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
+                {/* Eyebrow */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex items-center justify-center gap-3 mb-4"
+                >
+                    <span className="h-px w-8 bg-gold" />
+                    <span className="text-gold text-xs uppercase tracking-[0.2em] font-medium">
+                        L'Étude
+                    </span>
+                    <span className="h-px w-8 bg-gold" />
+                </motion.div>
+
+                {/* H1 */}
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="font-serif text-3xl text-white mb-4 leading-tight"
+                >
+                    Notre expertise<br />à votre service
+                </motion.h1>
+
+                {/* Subtitle */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="text-white/80 text-sm mb-3 max-w-xs leading-relaxed"
+                >
+                    Immobilier, famille, succession et entreprise.
+                    Une équipe de notaires expérimentés vous accompagne.
+                </motion.p>
+
+                {/* Quote */}
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="text-gold italic text-sm mb-8"
+                >
+                    « Nos clients ne sont jamais de simples numéros. »
+                </motion.p>
+
+                {/* CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                    <Button
+                        asChild
+                        size="lg"
+                        className="bg-gold hover:bg-gold-light text-text-primary px-6 py-5 text-sm transition-all duration-300"
+                    >
+                        <Link href="/contact">
+                            <Phone className="w-4 h-4 mr-2" />
+                            Nous contacter
+                        </Link>
+                    </Button>
+                </motion.div>
+
+                {/* Scroll indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                >
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                        <ArrowDown className="w-5 h-5 text-gold" />
+                    </motion.div>
+                </motion.div>
+            </div>
+
+            {/* Decorative circles */}
+            <div className="absolute top-[15%] left-[5%] w-16 h-16 pointer-events-none">
+                <div className="absolute inset-0 rounded-full bg-gold/15" />
+                <motion.div
+                    animate={{ opacity: [0.3, 0.8, 0.3] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                    className="absolute inset-0 rounded-full border-2 border-gold"
+                />
+            </div>
+            <div className="absolute top-[10%] right-[8%] w-12 h-12 pointer-events-none">
+                <div className="absolute inset-0 rounded-full bg-gold/10" />
+                <motion.div
+                    animate={{ opacity: [0.4, 0.9, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                    className="absolute inset-0 rounded-full border-2 border-gold"
+                />
+            </div>
+        </div>
+    );
+}
+
 // --- Main Hero Component ---
 const TOTAL_IMAGES = 20;
 const MAX_SCROLL = 3000; // Virtual scroll range
@@ -126,6 +248,17 @@ export default function IntroAnimation() {
     const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
     const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
     const containerRef = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile on mount and resize
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // --- Auto Rotation State ---
     const [autoRotate, setAutoRotate] = useState(true);
@@ -344,6 +477,11 @@ export default function IntroAnimation() {
     // Fade in content when arc is formed (morphValue > 0.8)
     const contentOpacity = useTransform(smoothMorph, [0.8, 1], [0, 1]);
     const contentY = useTransform(smoothMorph, [0.8, 1], [20, 0]);
+
+    // Render mobile version if on mobile
+    if (isMobile) {
+        return <MobileHero />;
+    }
 
     return (
         <div ref={containerRef} className="relative w-full h-full bg-[#FAFAFA] overflow-hidden">
