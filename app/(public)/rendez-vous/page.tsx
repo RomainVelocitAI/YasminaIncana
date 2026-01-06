@@ -442,8 +442,7 @@ export default function RendezVousPage() {
               Préparez votre <span className="text-primary">rendez-vous</span>
             </h1>
             <p className="text-lg text-text-secondary">
-              Consultez la liste des pièces à fournir selon votre démarche
-              pour préparer au mieux votre rendez-vous.
+              Gagnez du temps et optimisez votre rendez-vous en consultant la liste des pièces à fournir
             </p>
           </motion.div>
         </div>

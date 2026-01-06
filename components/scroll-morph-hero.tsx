@@ -511,7 +511,7 @@ export default function IntroAnimation() {
                         transition={{ duration: 1 }}
                         className="font-serif text-2xl font-medium tracking-tight text-primary md:text-4xl"
                     >
-                        L'étude INCANA
+                        Notre Etude
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
@@ -593,11 +593,10 @@ export default function IntroAnimation() {
                         Notre expertise à votre service
                     </h2>
                     <p className="text-sm md:text-base text-white/80 max-w-lg leading-relaxed mb-3">
-                        Immobilier, famille, succession et entreprise. <br className="hidden md:block" />
-                        Une équipe de notaires expérimentés vous accompagne dans tous vos projets à La Réunion.
+                        Une équipe dynamique afin de vous accompagner dans vos projets.
                     </p>
                     <p className="text-sm md:text-base text-gold italic max-w-md leading-relaxed">
-                        « Nos clients ne sont jamais de simples numéros. »
+                        « Chaque projet est unique »
                     </p>
                 </motion.div>
 

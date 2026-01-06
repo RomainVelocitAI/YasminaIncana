@@ -182,7 +182,8 @@ export default function TarifsPage() {
                       <strong className="text-text-primary">Le saviez-vous ?</strong>
                       <br />
                       Environ <span className="text-gold font-semibold">8/10ème</span> des
-                      frais sont reversés à l'État et aux collectivités locales. La
+                      frais sont reversés à l'État et aux collectivités locales.{' '}
+                      <span className="text-gold font-semibold">1/10ème</span> correspond aux débours. La
                       rémunération du notaire ne représente qu'environ{' '}
                       <span className="text-gold font-semibold">1/10ème</span> du total.
                     </p>

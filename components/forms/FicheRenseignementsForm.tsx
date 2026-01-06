@@ -599,8 +599,8 @@ export function FicheRenseignementsForm({ isOpen, onClose }: FicheRenseignements
 export function generateBlankFichePDF() {
   // Télécharger le PDF pré-conçu avec le logo en filigrane
   const link = document.createElement('a')
-  link.href = '/documents/fiche-renseignements-vierge.pdf'
-  link.download = 'fiche-renseignements-vierge.pdf'
+  link.href = '/documents/fiche-renseignements.pdf'
+  link.download = 'fiche-renseignements.pdf'
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)

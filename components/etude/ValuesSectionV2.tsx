@@ -37,9 +37,9 @@ const pairs = [
   },
   {
     photo: {
-      // Couple de personnes âgées savourant un café - ambiance chaleureuse et proximité
-      src: 'https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=600&h=400&fit=crop',
-      alt: 'Couple savourant un café - Proximité',
+      // Image locale pour la proximité
+      src: '/images/valeur-proximite.png',
+      alt: 'Proximité - Accompagnement personnalisé',
     },
     text: {
       icon: Users,
@@ -50,9 +50,9 @@ const pairs = [
   },
   {
     photo: {
-      // Femme professionnelle au téléphone - symbolise la réactivité
-      src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop',
-      alt: 'Professionnelle au téléphone - Réactivité',
+      // Image locale pour la réactivité
+      src: '/images/valeur-reactivite.png',
+      alt: 'Réactivité - Équipe disponible',
     },
     text: {
       icon: Clock,
