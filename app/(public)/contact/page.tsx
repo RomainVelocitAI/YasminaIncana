@@ -30,7 +30,7 @@ const appointmentMethods = [
   {
     id: 'remote',
     title: 'À distance par visioconférence',
-    description: 'Lors de nos déplacements dans le monde, la continuité de vos projets est assurée par la signature électronique de votre procuration à distance grâce à la visioconférence.',
+    description: 'Lors de vos déplacements dans le monde, la continuité de vos projets est assurée par la signature électronique de votre procuration à distance grâce à la visioconférence.',
     icon: Video,
     color: 'primary',
   },

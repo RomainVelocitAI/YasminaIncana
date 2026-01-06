@@ -36,7 +36,7 @@ const categories = [
     title: 'Rémunération du notaire',
     percentage: '10%',
     description:
-      "Parce que le notaire remplit une fonction d'intérêt public, la majorité des actes qu'il établit sont soumis à un tarif national. Pour les autres actes, votre notaire vous indiquera au préalable sa rémunération et vous proposera une convention d'honoraires.",
+      "Parce que le notaire remplit une fonction d'intérêt public, la majorité des actes qu'il établit sont soumis à un tarif fixé par la loi.",
     icon: Briefcase,
     color: '#7EBDC3',
   },
