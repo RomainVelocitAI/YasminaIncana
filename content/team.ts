@@ -12,7 +12,7 @@ export const team: TeamMember[] = [
   {
     name: "Chloé DUPÉRÉ",
     role: "Clerc de notaire",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=faces",
+    image: "/images/team-chloe.png",
     bio: "Forte de 10 années d'expérience acquises dans des études parisiennes prestigieuses, Chloé DUPÉRÉ apporte son expertise pointue en matière de copropriété. Sa maîtrise des dossiers complexes et son sens du détail garantissent un accompagnement de qualité pour chaque transaction.",
     email: null,
     specialties: ["Copropriété", "Transactions immobilières", "Droit de la construction"]
