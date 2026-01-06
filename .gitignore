@@ -48,3 +48,21 @@ PROMPT_CLAUDE_CODE.md
 PHOTOS ET VIDEOS/
 OBSERVATIONS/
 PREPARER MON RDV/
+
+# Images originales (backup local uniquement)
+public/images-original/
+
+# Fichiers temporaires et screenshots
+*.tmp
+tmp*.png
+.playwright-mcp/
+
+# Documents cliente (à la racine)
+*.doc
+*.docx
+replicate-prediction-*.png
+gros-plan-*.jpg
+photo-*.avif
+
+# Fichiers PDF à la racine (garder ceux dans public/documents/)
+/*.pdf
