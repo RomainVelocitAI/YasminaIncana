@@ -172,7 +172,7 @@ export function HeroV2() {
             {/* Image de fin (affichée quand la vidéo est terminée) */}
             {videoEnded && (
               <img
-                src="/images/video-poster.png"
+                src="/images/video-poster.webp"
                 alt="L'étude notariale"
                 className="absolute inset-0 w-full h-[70vh] md:h-[85vh] object-cover z-10"
               />
@@ -192,7 +192,7 @@ export function HeroV2() {
               />
               {/* Fallback image */}
               <img
-                src="/images/video-poster.png"
+                src="/images/video-poster.webp"
                 alt="L'étude notariale"
                 className="w-full h-full object-cover"
               />

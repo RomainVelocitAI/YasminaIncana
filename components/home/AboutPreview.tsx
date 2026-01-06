@@ -75,7 +75,7 @@ export function AboutPreview() {
                 {/* Main image */}
                 <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/about-preview.png"
+                    src="/images/about-preview.webp"
                     alt="Étude notariale"
                     fill
                     className="object-cover"

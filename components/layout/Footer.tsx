@@ -35,7 +35,7 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 mb-4">
               <div className="relative w-14 h-14">
                 <Image
-                  src="/images/logo.jpg"
+                  src="/images/logo.webp"
                   alt="Logo Maître INCANA"
                   fill
                   className="object-contain object-left"

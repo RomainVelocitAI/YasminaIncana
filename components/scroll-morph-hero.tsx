@@ -101,7 +101,7 @@ function MobileHero() {
             {/* Background image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/images/etude-hero.png"
+                    src="/images/etude-hero.webp"
                     alt="L'étude notariale"
                     fill
                     className="object-cover"
@@ -491,7 +491,7 @@ export default function IntroAnimation() {
                 className="absolute inset-0 z-0"
             >
                 <Image
-                    src="/images/etude-hero.png"
+                    src="/images/etude-hero.webp"
                     alt="L'étude notariale"
                     fill
                     className="object-cover"

@@ -19,7 +19,7 @@ const iconMap: Record<string, React.ElementType> = {
 const serviceImages: Record<string, string> = {
   immobilier: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&h=600&fit=crop',
   famille: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&h=600&fit=crop',
-  entreprise: '/images/service-entreprise.png',
+  entreprise: '/images/service-entreprise.webp',
 }
 
 export function ServicesPreview() {

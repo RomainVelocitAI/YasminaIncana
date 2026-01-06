@@ -11,9 +11,9 @@ import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 
 // Images locales de La Réunion pour chaque service
 const serviceImages: Record<string, string> = {
-  immobilier: '/images/service-immobilier.jpg',
-  famille: '/images/service-famille.png',
-  entreprise: '/images/service-entreprise.png',
+  immobilier: '/images/service-immobilier.webp',
+  famille: '/images/service-famille.webp',
+  entreprise: '/images/service-entreprise.webp',
 }
 
 interface ServiceSectionProps {

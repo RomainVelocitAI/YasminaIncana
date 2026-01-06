@@ -25,7 +25,7 @@ const pairs = [
   {
     photo: {
       // Poignée de main diverse - symbolise la confiance
-      src: '/images/valeur-confiance.jpg',
+      src: '/images/valeur-confiance.webp',
       alt: 'Poignée de main - Confiance',
     },
     text: {
@@ -51,7 +51,7 @@ const pairs = [
   {
     photo: {
       // Femme professionnelle - symbolise la réactivité
-      src: '/images/valeur-reactivite.png',
+      src: '/images/valeur-reactivite.webp',
       alt: 'Professionnelle - Réactivité',
     },
     text: {

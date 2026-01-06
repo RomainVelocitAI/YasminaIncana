@@ -80,7 +80,7 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
           <Link href="/" className="group flex items-center gap-3">
             <div className="relative w-12 h-12 md:w-14 md:h-14">
               <Image
-                src="/images/logo.jpg"
+                src="/images/logo.webp"
                 alt="Logo Maître INCANA"
                 fill
                 className="object-contain object-left"

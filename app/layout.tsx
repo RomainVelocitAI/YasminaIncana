@@ -73,7 +73,7 @@ export const metadata: Metadata = {
       "Étude notariale de Maître Yasmina INCANA à L'Étang Salé, La Réunion. Expertise en immobilier, succession, famille et entreprise.",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/og-image.webp',
         width: 1200,
         height: 630,
         alt: "Étude Notariale Maître INCANA - L'Étang Salé, La Réunion",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     title: "Maître INCANA - Notaire à L'Étang Salé | La Réunion",
     description:
       "Étude notariale de Maître Yasmina INCANA. Expertise en immobilier, succession, famille et entreprise.",
-    images: ['/images/og-image.jpg'],
+    images: ['/images/og-image.webp'],
   },
   robots: {
     index: true,
@@ -116,9 +116,9 @@ const jsonLd = {
       url: baseUrl,
       logo: {
         '@type': 'ImageObject',
-        url: `${baseUrl}/images/logo.jpg`,
+        url: `${baseUrl}/images/logo.webp`,
       },
-      image: `${baseUrl}/images/etude-hero.png`,
+      image: `${baseUrl}/images/etude-hero.webp`,
       description:
         "Étude notariale de Maître Yasmina INCANA à L'Étang Salé, La Réunion. Services en immobilier, succession, famille et entreprise.",
       address: {

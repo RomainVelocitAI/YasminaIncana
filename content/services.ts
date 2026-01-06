@@ -36,7 +36,7 @@ export const services: Service[] = [
     title: "Entreprise & Patrimoine",
     slug: "entreprise",
     icon: "Building2",
-    image: "/images/service-entreprise.png",
+    image: "/images/service-entreprise.webp",
     shortDescription: "Création de société, cessions et conseil patrimonial personnalisé",
     fullDescription: "Entrepreneurs et dirigeants, nous vous accompagnons dans la création, la transmission et la gestion de vos sociétés (SCI, SARL, SAS, SCCV, ...).",
     prestations: [
