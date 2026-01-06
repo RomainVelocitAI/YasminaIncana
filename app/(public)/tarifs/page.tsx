@@ -169,6 +169,8 @@ export default function TarifsPage() {
 
                 <div className="prose prose-lg">
                   <p className="text-text-secondary leading-relaxed mb-6">
+                    <strong className="text-primary">Les tarifs des notaires sont réglementés</strong>,
+                    c'est-à-dire fixés par la loi (décret n°2016-230 du 26 février 2016).
                     Les frais d'acte improprement appelés{' '}
                     <strong className="text-text-primary">« frais de notaire »</strong>{' '}
                     comprennent en réalité les taxes reversées au Trésor Public, les

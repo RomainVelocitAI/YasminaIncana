@@ -73,6 +73,7 @@
   /* Accents */
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
+  --color-teal: var(--teal);
 
   /* Status */
   --color-status-available: var(--status-available);
@@ -132,6 +133,9 @@
   /* Gold accents - WCAG AA compliant */
   --gold: #B8860B;
   --gold-light: #D4A84B;
+
+  /* Teal - utilisé pour cartes Entreprise */
+  --teal: #8B2942;
 
   /* Accent - Bordeaux/Rouge pour logo */
   --accent-red: #8B2942;

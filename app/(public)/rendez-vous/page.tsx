@@ -461,22 +461,25 @@ export default function RendezVousPage() {
                 primary: {
                   bg: 'bg-primary',
                   bgLight: 'bg-primary/10',
+                  bgCard: 'bg-primary/5',
                   text: 'text-primary',
-                  border: 'border-primary',
+                  border: 'border-primary/30',
                   hover: 'hover:border-primary'
                 },
                 gold: {
                   bg: 'bg-gold',
                   bgLight: 'bg-gold/10',
+                  bgCard: 'bg-gold/5',
                   text: 'text-gold',
-                  border: 'border-gold',
+                  border: 'border-gold/30',
                   hover: 'hover:border-gold'
                 },
                 teal: {
                   bg: 'bg-teal',
                   bgLight: 'bg-teal/10',
+                  bgCard: 'bg-teal/5',
                   text: 'text-teal',
-                  border: 'border-teal',
+                  border: 'border-teal/30',
                   hover: 'hover:border-teal'
                 }
               }
@@ -493,7 +496,7 @@ export default function RendezVousPage() {
                   className={`relative group cursor-pointer ${isMiddle ? 'md:-mt-4 md:mb-4' : ''}`}
                   onClick={() => openModal(category)}
                 >
-                  <div className={`h-full bg-background border-2 border-border-light ${colors.hover} rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}>
+                  <div className={`h-full flex flex-col ${colors.bgCard} border-2 ${colors.border} ${colors.hover} rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}>
                     {/* Icon */}
                     <div className={`w-16 h-16 rounded-2xl ${colors.bgLight} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                       <Icon className={`w-8 h-8 ${colors.text}`} />
@@ -504,14 +507,11 @@ export default function RendezVousPage() {
                     <p className="text-text-secondary text-sm mb-6">{category.description}</p>
 
                     {/* Subcategories as features */}
-                    <ul className="space-y-3 mb-8">
+                    <ul className="space-y-3 mb-8 flex-grow">
                       {category.subcategories.map((sub) => (
                         <li key={sub.title} className="flex items-center gap-3 text-sm text-text-primary">
                           <CheckCircle2 className={`w-5 h-5 ${colors.text} shrink-0`} />
                           {sub.title}
-                          {sub.provision && (
-                            <span className="text-xs text-text-muted">({sub.provision})</span>
-                          )}
                         </li>
                       ))}
                     </ul>

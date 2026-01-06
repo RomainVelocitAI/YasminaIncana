@@ -11,8 +11,9 @@ import { PulsingGoldLine } from '@/components/animations/SectionDivider'
 const pairs = [
   {
     photo: {
-      src: '/images/etude-expertise.png',
-      alt: 'Maître Incana - Expertise notariale',
+      // Plume de stylo élégante - symbolise l'expertise et la signature des actes
+      src: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&h=400&fit=crop',
+      alt: 'Plume de stylo - Expertise notariale',
     },
     text: {
       icon: Scale,
@@ -23,8 +24,9 @@ const pairs = [
   },
   {
     photo: {
-      src: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&h=400&fit=crop',
-      alt: 'Famille heureuse',
+      // Poignée de main professionnelle - symbolise la confiance
+      src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
+      alt: 'Poignée de main - Confiance',
     },
     text: {
       icon: Shield,
@@ -35,8 +37,9 @@ const pairs = [
   },
   {
     photo: {
-      src: '/images/etude-proximite.png',
-      alt: 'Accompagnement personnalisé',
+      // Couple de personnes âgées savourant un café - ambiance chaleureuse et proximité
+      src: 'https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=600&h=400&fit=crop',
+      alt: 'Couple savourant un café - Proximité',
     },
     text: {
       icon: Users,
@@ -47,8 +50,9 @@ const pairs = [
   },
   {
     photo: {
-      src: '/images/etude-reactivite.png',
-      alt: 'Équipe réactive',
+      // Femme professionnelle au téléphone - symbolise la réactivité
+      src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop',
+      alt: 'Professionnelle au téléphone - Réactivité',
     },
     text: {
       icon: Clock,
