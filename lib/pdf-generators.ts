@@ -405,8 +405,34 @@ export const CHECKLIST_CONFIGS: Record<string, ChecklistConfig> = {
   },
 }
 
-// Fonction helper pour générer une checklist spécifique
+// Mapping des types de checklist vers les fichiers DOCX réels
+const DOCX_FILES: Record<string, string> = {
+  'vente-vendeur': '/documents/vente-vendeur.docx',
+  'vente-acquereur': '/documents/vente-acquereur.docx',
+  'prescription-trentenaire': '/documents/prescription-trentenaire.docx',
+  'donation': '/documents/donation.docx',
+  'contrat-mariage': '/documents/contrat-mariage.docx',
+  'pacs': '/documents/pacs.docx',
+  'sci': '/documents/sci.docx',
+  'bail-commercial': '/documents/bail-commercial.docx',
+}
+
+// Fonction helper pour télécharger une checklist
+// Utilise les fichiers DOCX réels quand disponibles, sinon génère un PDF
 export function downloadChecklist(type: string) {
+  // Si un fichier DOCX existe, le télécharger directement
+  const docxPath = DOCX_FILES[type]
+  if (docxPath) {
+    const link = document.createElement('a')
+    link.href = docxPath
+    link.download = docxPath.split('/').pop() || `checklist-${type}.docx`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    return
+  }
+
+  // Sinon, générer un PDF (pour les types sans fichier DOCX comme "succession")
   const config = CHECKLIST_CONFIGS[type]
   if (config) {
     generateChecklistPDF(config)

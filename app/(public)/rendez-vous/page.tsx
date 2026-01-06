@@ -400,7 +400,7 @@ function DocumentModal({
                     className="w-full border-gold/50 text-gold hover:bg-gold/10 hover:border-gold"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    Télécharger la checklist PDF
+                    Télécharger la fiche
                   </Button>
                 </motion.div>
               ))}
