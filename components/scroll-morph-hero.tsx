@@ -511,7 +511,7 @@ export default function IntroAnimation() {
                         transition={{ duration: 1 }}
                         className="font-serif text-2xl font-medium tracking-tight text-primary md:text-4xl"
                     >
-                        Notre Etude
+                        Notre Étude
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
