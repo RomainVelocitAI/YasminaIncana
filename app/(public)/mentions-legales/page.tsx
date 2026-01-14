@@ -64,6 +64,17 @@ export default function MentionsLegalesPage() {
 
             <AnimatedSection delay={0.2}>
               <h2 className="font-serif text-2xl text-text-primary mt-12">
+                Conception du site
+              </h2>
+              <p className="text-text-secondary">
+                <strong>Romain CANO</strong>
+                <br />
+                Email : direction@velocit-ai.fr
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.3}>
+              <h2 className="font-serif text-2xl text-text-primary mt-12">
                 Hébergement
               </h2>
               <p className="text-text-secondary">
@@ -75,7 +86,7 @@ export default function MentionsLegalesPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.3}>
+            <AnimatedSection delay={0.4}>
               <h2 className="font-serif text-2xl text-text-primary mt-12">
                 Propriété intellectuelle
               </h2>
@@ -93,7 +104,7 @@ export default function MentionsLegalesPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.4}>
+            <AnimatedSection delay={0.5}>
               <h2 className="font-serif text-2xl text-text-primary mt-12">
                 Protection des données personnelles
               </h2>
@@ -116,7 +127,7 @@ export default function MentionsLegalesPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.5}>
+            <AnimatedSection delay={0.6}>
               <h2 className="font-serif text-2xl text-text-primary mt-12">
                 Cookies
               </h2>
@@ -127,7 +138,7 @@ export default function MentionsLegalesPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.6}>
+            <AnimatedSection delay={0.7}>
               <h2 className="font-serif text-2xl text-text-primary mt-12">
                 Crédits photographiques
               </h2>
@@ -140,7 +151,7 @@ export default function MentionsLegalesPage() {
               </ul>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.7}>
+            <AnimatedSection delay={0.8}>
               <h2 className="font-serif text-2xl text-text-primary mt-12">
                 Responsabilité
               </h2>
