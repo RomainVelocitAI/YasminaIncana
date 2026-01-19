@@ -131,7 +131,7 @@ export function generateChecklistPDF(config: ChecklistConfig) {
 
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(8)
-  doc.text('96 Avenue Raymond Barre - 97427 L\'Étang Salé | Tél : 0262 960 300 | office.incana@notaires.fr', pageWidth / 2, footerY + 10, { align: 'center' })
+  doc.text('99 Avenue Raymond Barre - 97427 L\'Étang Salé | Tél : 0262 960 300 | office.incana@notaires.fr', pageWidth / 2, footerY + 10, { align: 'center' })
 
   // Télécharger
   const fileName = `checklist-${config.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.pdf`

@@ -125,7 +125,7 @@ export function Hero() {
               className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-border-light"
             >
               <div>
-                <div className="font-serif text-2xl md:text-3xl text-primary">96 Avenue Raymond Barre</div>
+                <div className="font-serif text-2xl md:text-3xl text-primary">99 Avenue Raymond Barre</div>
                 <div className="text-sm text-text-muted uppercase tracking-wider mt-1">
                   Adresse
                 </div>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact | Maître INCANA - Notaire',
     description:
-      "Prenez rendez-vous avec notre équipe : à l'étude, à domicile ou en visioconférence. 96 Avenue Raymond Barre, L'Étang Salé.",
+      "Prenez rendez-vous avec notre équipe : à l'étude, à domicile ou en visioconférence. 99 Avenue Raymond Barre, L'Étang Salé.",
     url: '/contact',
     type: 'website',
   },

@@ -12,7 +12,7 @@ export const team: TeamMember[] = [
   {
     name: "Chloé DUPÉRÉ",
     role: "Collaboratrice",
-    image: "/images/team-chloe.webp",
+    image: "/images/team-chloe.svg",
     bio: "Diplômée en Droit et forte de 10 années d'expérience acquises dans des études parisiennes, Chloé DUPÉRÉ apporte son expertise pointue en matière immobilière. Sa maîtrise des dossiers complexes et son sens du relationnel garantissant un accompagnement unique pour chaque projet.",
     email: null,
     specialties: ["Copropriété", "Transactions immobilières", "Droit de la construction"]
@@ -30,7 +30,7 @@ export const team: TeamMember[] = [
 export const notaryInfo = {
   name: "Étude de Maître INCANA",
   title: "Notaire",
-  address: "96, Avenue Raymond Barre",
+  address: "99 Avenue Raymond Barre",
   city: "L'Étang Salé",
   postalCode: "97427",
   country: "La Réunion, France",

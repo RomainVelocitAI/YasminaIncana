@@ -123,7 +123,7 @@ const jsonLd = {
         "Étude notariale de Maître Yasmina INCANA à L'Étang Salé, La Réunion. Services en immobilier, succession, famille et entreprise.",
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '96 Avenue Raymond Barre',
+        streetAddress: '99 Avenue Raymond Barre',
         addressLocality: "L'Étang Salé",
         postalCode: '97427',
         addressRegion: 'La Réunion',

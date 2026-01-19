@@ -578,7 +578,7 @@ export default function RendezVousPage() {
                   </div>
                   <div>
                     <p className="text-sm text-text-muted mb-1">Adresse</p>
-                    <p className="text-lg text-text-primary font-medium">96 Avenue Raymond Barre</p>
+                    <p className="text-lg text-text-primary font-medium">99 Avenue Raymond Barre</p>
                     <p className="text-text-secondary">97427 L'Étang Salé</p>
                   </div>
                 </div>

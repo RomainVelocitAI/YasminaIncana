@@ -193,7 +193,7 @@ export function FicheRenseignementsForm({ isOpen, onClose }: FicheRenseignements
 
     doc.setTextColor(255, 255, 255)
     doc.setFontSize(9)
-    doc.text('96 Avenue Raymond Barre - 97427 L\'Étang Salé', pageWidth / 2, footerY + 8, { align: 'center' })
+    doc.text('99 Avenue Raymond Barre - 97427 L\'Étang Salé', pageWidth / 2, footerY + 8, { align: 'center' })
     doc.text('Tél : 0262 960 300 - Email : office.incana@notaires.fr', pageWidth / 2, footerY + 14, { align: 'center' })
 
     // Télécharger
