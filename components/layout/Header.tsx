@@ -75,16 +75,16 @@ export function Header({ showPropertiesLink = false }: HeaderProps) {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerStyles}`}
     >
       <nav className="container-wide">
-        <div className="flex items-center justify-between h-20 md:h-24">
+        <div className="flex items-center justify-between h-28 md:h-36">
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            <div className="relative w-12 h-12 md:w-14 md:h-14">
+            <div className="relative w-20 h-20 md:w-28 md:h-28">
               <Image
                 src="/images/logo.webp"
                 alt="Logo Maître INCANA"
                 fill
                 className="object-contain object-left"
-                sizes="56px"
+                sizes="112px"
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}
               />
