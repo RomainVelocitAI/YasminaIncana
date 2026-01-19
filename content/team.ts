@@ -5,7 +5,7 @@ export const team: TeamMember[] = [
     name: "Yasmina INCANA",
     role: "Notaire titulaire",
     image: "/images/maitre-incana.png",
-    bio: "Major de promotion en Master à la Faculté de Droit, puis titulaire du Diplôme Supérieur du Notariat, Yasmina INCANA a fondé son étude en 2017. Soucieuse d'être proche de chacun, elle a choisi la ville de L'ETANG SALE afin d'offrir un service de proximité et un accueil dans un environnement chaleureux et décontracté. Accordant une grande importance à l'écoute, de nombreuses familles ont été accompagnées dans l'acquisition et la transmission de leurs biens.",
+    bio: "Major de promotion en Master à la Faculté de Droit, puis titulaire du Diplôme Supérieur du Notariat, Yasmina INCANA a fondé son étude à L'ETANG SALE afin d'offrir un service de proximité et un accueil dans un environnement chaleureux et décontracté. Accordant une grande importance à l'écoute, de nombreuses familles ont été accompagnées dans l'acquisition et la transmission de leurs biens.",
     email: "yasmina.incana@notaires.fr",
     specialties: ["Droit immobilier", "Droit de la famille", "Droit des successions"]
   },
